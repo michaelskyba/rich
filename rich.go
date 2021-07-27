@@ -31,7 +31,7 @@ func get_digits(num int) int {
 	return digits
 }
 
-func List(home_dir string) {
+func list(home_dir string) {
 	// Get habit names
 	habit_files, _ := ioutil.ReadDir(home_dir)
 	var habit_filenames []string
@@ -74,7 +74,7 @@ func List(home_dir string) {
 
 	// List info
 	for _, habit := range habits {
-		// Use digit infomration to decide on trailing spaces
+		// Use digit information to decide on trailing spaces
 		trailing := strings.Repeat(" ", max_digits - get_digits(habit.Length))
 
 		fmt.Printf("%v%v - %v\n", trailing, habit.Length, habit.Name)
@@ -92,6 +92,6 @@ func main() {
 
 	// list habits and streaks
 	if len(os.Args) < 3 {
-		List(home_dir)
+		list(home_dir)
 	}
 }
