@@ -4,7 +4,14 @@ import (
 	"fmt"
 	"os"
 	"io/ioutil"
+	"bufio"
+	"strconv"
 )
+
+type Streak struct {
+	Name string
+	Length int
+}
 
 func main() {
 	var home_dir string
@@ -16,12 +23,31 @@ func main() {
 
 	// list habits and streaks
 	if len(os.Args) < 3 {
-		// Get list of habits
+		// Get habit names
 		habit_files, _ := ioutil.ReadDir(home_dir)
-
-		// Print each name
+		var habit_filenames []string
 		for _, habit_file := range habit_files {
-			fmt.Println(habit_file.Name())
+			habit_filenames = append(habit_filenames, habit_file.Name())
 		}
+
+		// Get habit streaks
+		var habits []Streak
+		for _, habit_filename := range habit_filenames {
+			habit_file, _ := os.Open(fmt.Sprintf("%v/%v", home_dir, habit_filename))
+
+			// Iterate over lines in habit file, find third line
+			line := 0
+			scanner := bufio.NewScanner(habit_file)
+			for scanner.Scan() {
+				if line == 2 {
+					streak, _ := strconv.Atoi(scanner.Text())
+					habits = append(habits, Streak{habit_filename, streak})
+				}
+				line++
+			}
+
+			habit_file.Close()
+		}
+		fmt.Println(habits)
 	}
 }
