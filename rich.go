@@ -81,6 +81,11 @@ func list(home_dir string) {
 	}
 }
 
+// Reset streak if past due date
+func update_streak(filename string) {
+	fmt.Println(filename)
+}
+
 func main() {
 	// Decide where habits will be read/stored
 	var home_dir string
@@ -118,12 +123,15 @@ func main() {
 		os.Exit(0)
 
 	case "mark":
+		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
 		os.Exit(0)
 
 	case "unmark":
+		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
 		os.Exit(0)
 
 	case "todo":
+		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
 		os.Exit(0)
 
 	default:
