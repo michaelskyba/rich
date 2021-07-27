@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"sort"
 	"strings"
+	"time"
 )
 
 type Streak struct {
@@ -83,7 +84,22 @@ func list(home_dir string) {
 
 // Reset streak if past due date
 func update_streak(filename string) {
-	fmt.Println(filename)
+	cdate := time.Now().Unix()
+
+	var habit_date int64
+
+	// Get first line (last date) from habit file
+	habit_file, _ := os.Open(filename)
+	scanner := bufio.NewScanner(habit_file)
+	for scanner.Scan() {
+		habit_time, _ := time.Parse("2006-01-02", scanner.Text())
+		habit_date = habit_time.Unix()
+		break
+	}
+	habit_file.Close()
+
+	fmt.Printf("habit_date: %v\n", habit_date)
+	fmt.Printf("today     : %v\n", cdate)
 }
 
 func main() {
