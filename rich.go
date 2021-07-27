@@ -57,6 +57,15 @@ func main() {
 			return habits[i].Length > habits[j].Length
 		})
 
+		// Find highest total streak
+		var max int
+		for _, habit := range habits {
+			if habit.Length > max {
+				max = habit.Length
+			}
+		}
+
 		fmt.Println(habits)
+		fmt.Println(max)
 	}
 }
