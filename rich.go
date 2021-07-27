@@ -90,14 +90,24 @@ func list(home_dir string) {
 
 // Reset streak if past due date
 func update_streak(filename string) {
-	cdate := time.Now().Unix()
+	cdate := int(time.Now().Unix())
 
 	// Get first line (last date) from habit file
 	habit_time, _ := time.Parse("2006-01-02", get_line(filename, 0))
-	habit_date := habit_time.Unix()
+	habit_date := int(habit_time.Unix())
 
-	fmt.Printf("habit_date: %v\n", habit_date)
-	fmt.Printf("today     : %v\n", cdate)
+	interval, _ := strconv.Atoi(get_line(filename, 1))
+
+	// 86400s in a day - has due date passed?
+	// if cdate > habit_date + interval {
+	if cdate > habit_date + (interval + 1) * 86400 {
+		habit_file, _ := ioutil.ReadFile(filename)
+		lines := strings.Split(string(habit_file), "\n")
+
+		// Reset streak
+		lines[2] = "0"
+		_ = ioutil.WriteFile(filename, []byte(strings.Join(lines, "\n")), 0644)
+	}
 }
 
 func main() {
