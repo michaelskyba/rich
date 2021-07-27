@@ -65,7 +65,19 @@ func main() {
 			}
 		}
 
+		// Get number of digits
+		var digits int
+		if max == 0 {
+			digits = 1
+		} else {
+			digits = 0
+			for max > 0 {
+				max /= 10
+				digits++
+			}
+		}
+
 		fmt.Println(habits)
-		fmt.Println(max)
+		fmt.Println(digits)
 	}
 }
