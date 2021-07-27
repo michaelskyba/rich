@@ -99,6 +99,22 @@ func main() {
 	switch os.Args[1] {
 
 	case "new":
+		// Defaults
+		interval := 1
+		if len(os.Args) > 3 {
+			interval, _ = strconv.Atoi(os.Args[3])
+		}
+		streak := 0
+		if len(os.Args) > 4 {
+			streak, _ = strconv.Atoi(os.Args[4])
+		}
+
+		filename := fmt.Sprintf("%v/%v", home_dir, os.Args[2])
+
+		// April Fool's Day is arbitrary, it just needs a day in the past
+		content := []byte(fmt.Sprintf("2021-04-01\n%v\n%v", interval, streak))
+		_ = ioutil.WriteFile(filename, content, 0644)
+
 		os.Exit(0)
 
 	case "mark":
