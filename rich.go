@@ -15,6 +15,22 @@ type Streak struct {
 	Length int
 }
 
+func get_digits(num int) int {
+	var digits int
+
+	if num == 0 {
+		digits = 1
+	} else {
+		digits = 0
+		for num > 0 {
+			num  /= 10
+			digits++
+		}
+	}
+
+	return digits
+}
+
 func List(home_dir string) {
 	// Get habit names
 	habit_files, _ := ioutil.ReadDir(home_dir)
@@ -54,36 +70,12 @@ func List(home_dir string) {
 			max = habit.Length
 		}
 	}
-
-	// Get number of digits
-	var max_digits int
-	if max == 0 {
-		max_digits = 1
-	} else {
-		max_digits = 0
-		for max > 0 {
-			max /= 10
-			max_digits++
-		}
-	}
+	max_digits := get_digits(max)
 
 	// List info
 	for _, habit := range habits {
-		// Get number of digits of current streak (not max)
-		streak := habit.Length
-		var digits int
-		if streak == 0 {
-			digits = 1
-		} else {
-			digits = 0
-			for streak > 0 {
-				streak /= 10
-				digits++
-			}
-		}
-
 		// Use digit infomration to decide on trailing spaces
-		trailing := strings.Repeat(" ", max_digits - digits)
+		trailing := strings.Repeat(" ", max_digits - get_digits(habit.Length))
 
 		fmt.Printf("%v%v - %v\n", trailing, habit.Length, habit.Name)
 	}
