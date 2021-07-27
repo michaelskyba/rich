@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"bufio"
 	"strconv"
+	"sort"
 )
 
 type Streak struct {
@@ -48,6 +49,12 @@ func main() {
 
 			habit_file.Close()
 		}
+
+		// Sort habits based on streak lengths
+		sort.Slice(habits, func(i, j int) bool {
+			return habits[i].Length > habits[j].Length
+		})
+
 		fmt.Println(habits)
 	}
 }
