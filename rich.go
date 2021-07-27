@@ -32,6 +32,22 @@ func get_digits(num int) int {
 	return digits
 }
 
+func get_line(filename string, i int) string {
+	file, _ := os.Open(filename)
+	defer file.Close()
+
+	line := 0
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		if line == i {
+			return scanner.Text()
+		}
+		line++
+	}
+
+	return ""
+}
+
 func list(home_dir string) {
 	// Get habit names
 	habit_files, _ := ioutil.ReadDir(home_dir)
@@ -43,20 +59,10 @@ func list(home_dir string) {
 	// Get habit streaks
 	var habits []Streak
 	for _, habit_filename := range habit_filenames {
-		habit_file, _ := os.Open(fmt.Sprintf("%v/%v", home_dir, habit_filename))
+		full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
 
-		// Iterate over lines in habit file, find third line
-		line := 0
-		scanner := bufio.NewScanner(habit_file)
-		for scanner.Scan() {
-			if line == 2 {
-				streak, _ := strconv.Atoi(scanner.Text())
-				habits = append(habits, Streak{habit_filename, streak})
-			}
-			line++
-		}
-
-		habit_file.Close()
+		streak, _ := strconv.Atoi(get_line(full_path, 2))
+		habits = append(habits, Streak{habit_filename, streak})
 	}
 
 	// Sort habits based on streak lengths
@@ -86,17 +92,9 @@ func list(home_dir string) {
 func update_streak(filename string) {
 	cdate := time.Now().Unix()
 
-	var habit_date int64
-
 	// Get first line (last date) from habit file
-	habit_file, _ := os.Open(filename)
-	scanner := bufio.NewScanner(habit_file)
-	for scanner.Scan() {
-		habit_time, _ := time.Parse("2006-01-02", scanner.Text())
-		habit_date = habit_time.Unix()
-		break
-	}
-	habit_file.Close()
+	habit_time, _ := time.Parse("2006-01-02", get_line(filename, 0))
+	habit_date := habit_time.Unix()
 
 	fmt.Printf("habit_date: %v\n", habit_date)
 	fmt.Printf("today     : %v\n", cdate)
