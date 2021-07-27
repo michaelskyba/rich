@@ -18,10 +18,10 @@ By staying aware of this, you now understand how to extend rich, adding your own
 personal features.
 
 ## Commands
-``rich new <habit name> [interval] [streak]`` - create a new habit. Interval will be set 
+- ``rich new <habit name> [interval] [streak]`` - create a new habit. Interval will be set 
 to "1" by default (daily) and streak will be set to "0" by default (no streak yet).
-``rich mark <habit name>`` - mark a habit as performed for this interval.
-``rich unmark <habit name>`` - unmark a habit as performed for this interval.
-`` rich todo`` - list habits that have yet to be marked for their current interval.
-``rich`` - list all existing habits. The justification for this feature's existence
+- ``rich mark <habit name>`` - mark a habit as performed for this interval.
+- ``rich unmark <habit name>`` - unmark a habit as performed for this interval.
+- `` rich todo`` - list habits that have yet to be marked for their current interval.
+- ``rich`` - list all existing habits. The justification for this feature's existence
 is that it will also give you the streak number of each habit and sort habits accordingly.
