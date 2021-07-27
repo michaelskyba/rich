@@ -15,6 +15,7 @@ type Streak struct {
 }
 
 func main() {
+	// Decide where habits will be read/stored
 	var home_dir string
 	if os.Getenv("RICH_HOME") == "" {
 		home_dir = fmt.Sprintf("%v/.local/share/rich", os.Getenv("HOME"))
@@ -24,6 +25,7 @@ func main() {
 
 	// list habits and streaks
 	if len(os.Args) < 3 {
+
 		// Get habit names
 		habit_files, _ := ioutil.ReadDir(home_dir)
 		var habit_filenames []string
