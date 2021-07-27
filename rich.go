@@ -120,8 +120,12 @@ func main() {
 	}
 
 	// list habits and streaks
-	if len(os.Args) < 3 {
+	if len(os.Args) == 1 {
 		list(home_dir)
+		os.Exit(0)
+
+	} else if os.Args[1] == "todo" {
+		// Todo
 		os.Exit(0)
 	}
 
@@ -151,10 +155,6 @@ func main() {
 		os.Exit(0)
 
 	case "unmark":
-		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
-		os.Exit(0)
-
-	case "todo":
 		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
 		os.Exit(0)
 
