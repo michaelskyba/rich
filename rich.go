@@ -93,5 +93,25 @@ func main() {
 	// list habits and streaks
 	if len(os.Args) < 3 {
 		list(home_dir)
+		os.Exit(0)
+	}
+
+	switch os.Args[1] {
+
+	case "new":
+		os.Exit(0)
+
+	case "mark":
+		os.Exit(0)
+
+	case "unmark":
+		os.Exit(0)
+
+	case "todo":
+		os.Exit(0)
+
+	default:
+		fmt.Println("See the README for usage.")
+		os.Exit(1)
 	}
 }
