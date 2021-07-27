@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"io/ioutil"
 )
 
 func main() {
@@ -13,5 +14,14 @@ func main() {
 		home_dir = os.Getenv("RICH_HOME")
 	}
 
-	fmt.Println(home_dir)
+	// list habits and streaks
+	if len(os.Args) < 3 {
+		// Get list of habits
+		habit_files, _ := ioutil.ReadDir(home_dir)
+
+		// Print each name
+		for _, habit_file := range habit_files {
+			fmt.Println(habit_file.Name())
+		}
+	}
 }
