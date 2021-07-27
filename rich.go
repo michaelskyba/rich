@@ -7,6 +7,7 @@ import (
 	"bufio"
 	"strconv"
 	"sort"
+	"strings"
 )
 
 type Streak struct {
@@ -66,18 +67,36 @@ func main() {
 		}
 
 		// Get number of digits
-		var digits int
+		var max_digits int
 		if max == 0 {
-			digits = 1
+			max_digits = 1
 		} else {
-			digits = 0
+			max_digits = 0
 			for max > 0 {
 				max /= 10
-				digits++
+				max_digits++
 			}
 		}
 
-		fmt.Println(habits)
-		fmt.Println(digits)
+		// List info
+		for _, habit := range habits {
+			// Get number of digits of current streak (not max)
+			streak := habit.Length
+			var digits int
+			if streak == 0 {
+				digits = 1
+			} else {
+				digits = 0
+				for streak > 0 {
+					streak /= 10
+					digits++
+				}
+			}
+
+			// Use digit infomration to decide on trailing spaces
+			trailing := strings.Repeat(" ", max_digits - digits)
+
+			fmt.Printf("%v%v - %v\n", trailing, habit.Length, habit.Name)
+		}
 	}
 }
