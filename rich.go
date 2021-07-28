@@ -61,7 +61,7 @@ func list(home_dir string) {
 	for _, habit_filename := range habit_filenames {
 		full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
 
-		streak, _ := strconv.Atoi(get_line(full_path, 2))
+		streak, _ := strconv.Atoi(get_line(full_path, 1))
 		habits = append(habits, Streak{habit_filename, streak})
 	}
 
