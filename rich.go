@@ -137,7 +137,7 @@ func main() {
 			habit_filenames = append(habit_filenames, habit_file.Name())
 		}
 
-		// Iterate over habit names, comparing dates
+		// Iterate over habit names, printing if not marked
 		for _, habit_filename := range habit_filenames {
 			full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
 
@@ -149,6 +149,7 @@ func main() {
 		os.Exit(0)
 	}
 
+	full_path := fmt.Sprintf("%v/%v", home_dir, os.Args[2])
 	switch os.Args[1] {
 
 	case "new":
@@ -158,18 +159,35 @@ func main() {
 			streak, _ = strconv.Atoi(os.Args[3])
 		}
 
-		filename := fmt.Sprintf("%v/%v", home_dir, os.Args[2])
-
 		// April Fool's Day is arbitrary, it just needs a day in the past
 		timezone, _ := time.Now().Zone()
 		content := []byte(fmt.Sprintf("2021-04-01 %v\n%v\n", timezone, streak))
-		_ = ioutil.WriteFile(filename, content, 0644)
+		_ = ioutil.WriteFile(full_path, content, 0644)
 
 		os.Exit(0)
 
 	case "mark":
-		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
-		os.Exit(0)
+		if is_marked(full_path) {
+			fmt.Println("Habit already completed today.")
+			os.Exit(1)
+
+		} else {
+			update_streak(full_path)
+
+			// Open habit file
+			habit_file, _ := ioutil.ReadFile(full_path)
+			lines := strings.Split(string(habit_file), "\n")
+
+			// Update date
+			lines[0] = time.Now().Format("2006-01-02 MST")
+	
+			// Increment streak
+			streak, _ := strconv.Atoi(lines[1])
+			lines[1] = strconv.Itoa(streak + 1)
+
+			_ = ioutil.WriteFile(full_path, []byte(strings.Join(lines, "\n")), 0644)
+			os.Exit(0)
+		}
 
 	default:
 		fmt.Println("See the README for usage.")
