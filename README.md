@@ -20,7 +20,7 @@ if ``$RICH_HOME`` is unset. **rich does not create these directories automatical
 - ``rich new <habit name> [streak]`` - create a new habit.
 Streak will be set to "0" by default (no streak yet). The last date will be set 
 to yesterday - i.e. the habit is not marked as complete for today. If your streak
-includes today, just submit (streak - 1), and then run rich mark <habit name>.
+includes today, just submit (streak - 1), and then run ``rich mark <habit name>``.
 - ``rich mark <habit name>`` - mark a habit as complete for today.
 - ``rich todo`` - list habits that have yet to be completed today.
 - ``rich`` - list all existing habits. The justification for this feature's existence
