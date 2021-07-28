@@ -125,7 +125,19 @@ func main() {
 		os.Exit(0)
 
 	} else if os.Args[1] == "todo" {
-		// Todo
+		// Get habit names
+		habit_files, _ := ioutil.ReadDir(home_dir)
+		var habit_filenames []string
+		for _, habit_file := range habit_files {
+			habit_filenames = append(habit_filenames, habit_file.Name())
+		}
+
+		// Iterate over habit names, comparing dates
+		for _, habit_filename := range habit_filenames {
+			full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
+			fmt.Println(get_line(full_path, 0))
+		}
+
 		os.Exit(0)
 	}
 
