@@ -159,9 +159,11 @@ func main() {
 			streak, _ = strconv.Atoi(os.Args[3])
 		}
 
-		// April Fool's Day is arbitrary, it just needs a day in the past
-		timezone, _ := time.Now().Zone()
-		content := []byte(fmt.Sprintf("2021-04-01 %v\n%v\n", timezone, streak))
+		// We need yesterday - otherwise, if you set a streak, rich mark will reset it
+		// It will think the streak was in the past
+
+		time_string := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
+		content := []byte(fmt.Sprintf("%v\n%v\n", time_string, streak))
 		_ = ioutil.WriteFile(full_path, content, 0644)
 
 		os.Exit(0)
