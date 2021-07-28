@@ -131,8 +131,15 @@ func main() {
 
 		// Iterate over habit names, comparing dates
 		for _, habit_filename := range habit_filenames {
+			cdate := time.Now().Format("2006-01-02 MST")
+
 			full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
-			fmt.Println(get_line(full_path, 0))
+			habit_date := get_line(full_path, 0)
+
+			// habit date wasn't set to today (not completed)
+			if cdate != habit_date {
+				fmt.Println(habit_filename)
+			}
 		}
 
 		os.Exit(0)
