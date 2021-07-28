@@ -106,6 +106,14 @@ func update_streak(filename string) {
 	}
 }
 
+// Has a habit been marked today?
+func is_marked(filename string) bool {
+	cdate := time.Now().Format("2006-01-02 MST")
+	habit_date := get_line(filename, 0)
+
+	return cdate == habit_date
+}
+
 func main() {
 	// Decide where habits will be read/stored
 	var home_dir string
@@ -131,13 +139,9 @@ func main() {
 
 		// Iterate over habit names, comparing dates
 		for _, habit_filename := range habit_filenames {
-			cdate := time.Now().Format("2006-01-02 MST")
-
 			full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
-			habit_date := get_line(full_path, 0)
 
-			// habit date wasn't set to today (not completed)
-			if cdate != habit_date {
+			if !is_marked(full_path) {
 				fmt.Println(habit_filename)
 			}
 		}
