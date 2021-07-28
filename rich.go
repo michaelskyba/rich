@@ -125,6 +125,7 @@ func main() {
 		os.Exit(0)
 
 	} else if os.Args[1] == "todo" {
+
 		// Get habit names
 		habit_files, _ := ioutil.ReadDir(home_dir)
 		var habit_filenames []string
@@ -163,10 +164,6 @@ func main() {
 		os.Exit(0)
 
 	case "mark":
-		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
-		os.Exit(0)
-
-	case "unmark":
 		update_streak(fmt.Sprintf("%v/%v", home_dir, os.Args[2]))
 		os.Exit(0)
 
