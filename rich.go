@@ -56,6 +56,12 @@ func list(home_dir string) {
 		habit_filenames = append(habit_filenames, habit_file.Name())
 	}
 
+	// Reset lost streaks
+	for _, habit_filename := range habit_filenames {
+		full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
+		update_streak(full_path)
+	}
+
 	// Get habit streaks
 	var habits []Streak
 	for _, habit_filename := range habit_filenames {
