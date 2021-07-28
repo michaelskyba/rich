@@ -12,6 +12,9 @@ that you gave the habit. The layout is as follows:
 <date of the last time the habit was performed>
 <the current streak>
 ```
+These habit files will be stored in ``$RICH_HOME``, or ``$HOME/.local/share/rich``
+if ``$RICH_HOME`` is unset. **rich does not create these directories automatically**.
+``mkdir`` your directory manually before your first use.
 
 ## Commands
 - ``rich new <habit name> [streak]`` - create a new habit.
