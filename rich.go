@@ -176,7 +176,7 @@ func main() {
 
 	case "mark":
 		if is_marked(full_path) {
-			fmt.Println("Habit already completed today.")
+			fmt.Println("That habit has already been completed today.")
 			os.Exit(1)
 
 		} else {
@@ -188,7 +188,7 @@ func main() {
 
 			// Update date
 			lines[0] = time.Now().Format("2006-01-02 MST")
-	
+
 			// Increment streak
 			streak, _ := strconv.Atoi(lines[1])
 			lines[1] = strconv.Itoa(streak + 1)
