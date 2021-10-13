@@ -166,6 +166,7 @@ func main() {
 		os.Exit(0)
 
 	} else {
+		// e.g. "rich foo"
 		user_error()
 	}
 
@@ -212,6 +213,7 @@ func main() {
 		}
 
 	default:
+		// e.g. "rich foo bar"
 		user_error()
 	}
 }
