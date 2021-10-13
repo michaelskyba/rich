@@ -164,6 +164,9 @@ func main() {
 		}
 
 		os.Exit(0)
+
+	} else {
+		user_error()
 	}
 
 	full_path := fmt.Sprintf("%v/%v", home_dir, os.Args[2])
