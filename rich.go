@@ -16,6 +16,17 @@ type Streak struct {
 	Length int
 }
 
+func user_error() {
+	fmt.Println(`Commands:
+rich new <habit name> [streak]
+rich mark <habit name>
+rich todo
+rich
+See the README for more information.`)
+
+	os.Exit(1)
+}
+
 func get_digits(num int) int {
 	var digits int
 
@@ -198,7 +209,6 @@ func main() {
 		}
 
 	default:
-		fmt.Println("See the README for usage.")
-		os.Exit(1)
+		user_error()
 	}
 }
