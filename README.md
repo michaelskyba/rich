@@ -25,3 +25,15 @@ includes today, just submit (streak - 1), and then run ``rich mark <habit name>`
 - ``rich todo`` - list habits that have yet to be completed today.
 - ``rich`` - list all existing habits. The justification for this feature's existence
 is that it will also give you the streak number of each habit and sort habits accordingly.
+
+## $RICH_HOOK
+rich provides a hook which will run when a habit is being reset. Set ``$RICH_HOOK`` to a
+an executable file (the language doesn't matter). The following arguments will be passed
+in the order I have indicated:
+``<name of habit> <last completion date> <streak length before reset> <current date>``.
+
+The purpose of this is extensibility. One example is making a graph with gnuplot representing
+your streak lengths for a habit over time. Another example is making a "forgot to mark" system
+(perhaps you completed a habit yesterday but forgot to mark it so now it has been reset).
+Without a hook, neither of these could not be implemented elegantly: you would have to reimplement
+rich's late mark detection.
