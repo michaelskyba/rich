@@ -29,8 +29,11 @@ is that it will also give you the streak number of each habit and sort habits ac
 ## $RICH_HOOK
 rich provides a hook which will run when a habit is being reset. Set ``$RICH_HOOK`` to a
 an executable file (the language doesn't matter). The following arguments will be passed
-in the order I have indicated:
-``<filename of habit> <last completion date> <streak length before reset> <current date>``.
+in this order:
+1. full path to habit file
+2. last completion date in YYYY-MM-DD format (e.g. 2021-12-25)
+3. streak length before reset
+4. current date in YYYY-MM-DD format
 
 The purpose of this is extensibility. One example is making a graph with gnuplot representing
 your streak lengths for a habit over time. Another example is making a "forgot to mark" system
