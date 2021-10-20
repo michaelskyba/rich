@@ -120,8 +120,9 @@ func update_streak(filename string) {
 		lines := strings.Split(string(habit_file), "\n")
 
 		// RICH_HOOK: filename last_completion old_streak cdate
+		// Don't run it if the streak is already 0, that would be useless
 		hook := os.Getenv("RICH_HOOK")
-		if hook != "" {
+		if hook != "" && lines[1] != "0" {
 			habit_time := habit_time.Format("2006-01-02")
 			current_time := current_time.Format("2006-01-02")
 
