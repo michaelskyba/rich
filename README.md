@@ -28,7 +28,7 @@ is that it will also give you the streak number of each habit and sort habits ac
 
 ## $RICH_HOOK
 rich provides a hook which will run when a habit is being reset. Reset means 
-being "_re_set to zero", so a habit will not count as reset if the habit streak 
+being "reset to zero", so a check will not count as reset if the habit streak 
 is already zero. Set ``$RICH_HOOK`` to an executable (the language doesn't matter).
 The following arguments will be passed
 in this order:
