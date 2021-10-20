@@ -27,8 +27,10 @@ includes today, just submit (streak - 1), and then run ``rich mark <habit name>`
 is that it will also give you the streak number of each habit and sort habits accordingly.
 
 ## $RICH_HOOK
-rich provides a hook which will run when a habit is being reset. Set ``$RICH_HOOK`` to a
-an executable file (the language doesn't matter). The following arguments will be passed
+rich provides a hook which will run when a habit is being reset. Reset means 
+being "_re_set to zero", so a habit will not count as reset if the habit streak 
+is already zero. Set ``$RICH_HOOK`` to an executable (the language doesn't matter).
+The following arguments will be passed
 in this order:
 1. full path to habit file
 2. last completion date in YYYY-MM-DD format (e.g. 2021-12-25)
