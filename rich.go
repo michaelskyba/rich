@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"io/ioutil"
 	"bufio"
 	"strconv"
@@ -112,10 +113,21 @@ func update_streak(filename string) {
 	habit_time, _ := time.Parse("2006-01-02 MST", get_line(filename, 0))
 
 	// Has due date passed? (is current time > habit_time + 2 days?)
-	if time.Now().After(habit_time.AddDate(0, 0, 2)) {
+	current_time := time.Now()
+	if current_time.After(habit_time.AddDate(0, 0, 2)) {
 
 		habit_file, _ := ioutil.ReadFile(filename)
 		lines := strings.Split(string(habit_file), "\n")
+
+		// RICH_HOOK: filename last_completion old_streak cdate
+		hook := os.Getenv("RICH_HOOK")
+		if hook != "" {
+			habit_time := habit_time.Format("2006-01-02")
+			current_time := current_time.Format("2006-01-02")
+
+			exec.Command(hook, filename, habit_time, lines[1], current_time).Output()
+		}
+		fmt.Println(hook)
 
 		// Reset streak
 		lines[1] = "0"
