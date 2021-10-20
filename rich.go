@@ -128,7 +128,6 @@ func update_streak(filename string) {
 
 			exec.Command(hook, filename, habit_time, lines[1], current_time).Output()
 		}
-		fmt.Println(hook)
 
 		// Reset streak
 		lines[1] = "0"
