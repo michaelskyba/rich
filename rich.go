@@ -17,6 +17,13 @@ type Streak struct {
 	Length int
 }
 
+func catch_error(err error, message string) {
+	if err != nil {
+		fmt.Println(message)
+		os.Exit(1)
+	}
+}
+
 func user_error() {
 	fmt.Println(`Commands:
 rich new <habit name> [streak]
@@ -160,7 +167,9 @@ func main() {
 	} else if os.Args[1] == "todo" {
 
 		// Get habit names
-		habit_files, _ := ioutil.ReadDir(home_dir)
+		habit_files, err := ioutil.ReadDir(home_dir)
+		catch_error(err, "Error: Invalid home directory")
+
 		var habit_filenames []string
 		for _, habit_file := range habit_files {
 			habit_filenames = append(habit_filenames, habit_file.Name())
