@@ -228,6 +228,10 @@ func main() {
 
 		catch_error(err, "Error: Couldn't create habit file")
 
+	case "delete":
+		err := os.Remove(full_path)
+		catch_error(err, "Error: Couldn't delete habit file")
+
 	case "mark":
 		// Iterate over every habit listed to mark
 		for i, habit := range os.Args {
