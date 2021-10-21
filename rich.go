@@ -69,7 +69,9 @@ func get_line(filename string, i int) string {
 
 func list(home_dir string) {
 	// Get habit names
-	habit_files, _ := ioutil.ReadDir(home_dir)
+	habit_files, err := ioutil.ReadDir(home_dir)
+	catch_error(err, "Error: Invalid home directory")
+
 	var habit_filenames []string
 	for _, habit_file := range habit_files {
 		habit_filenames = append(habit_filenames, habit_file.Name())
@@ -86,7 +88,9 @@ func list(home_dir string) {
 	for _, habit_filename := range habit_filenames {
 		full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
 
-		streak, _ := strconv.Atoi(get_line(full_path, 1))
+		streak, err := strconv.Atoi(get_line(full_path, 1))
+		catch_error(err, "Error: Invalid streak in habit file")
+
 		habits = append(habits, Streak{habit_filename, streak})
 	}
 
@@ -117,13 +121,16 @@ func list(home_dir string) {
 func update_streak(filename string) {
 
 	// Get time from habit file
-	habit_time, _ := time.Parse("2006-01-02 MST", get_line(filename, 0))
+	habit_time, err := time.Parse("2006-01-02 MST", get_line(filename, 0))
+	catch_error(err, "Error: Invalid date in habit file")
 
 	// Has due date passed? (is current time > habit_time + 2 days?)
 	current_time := time.Now()
 	if current_time.After(habit_time.AddDate(0, 0, 2)) {
 
-		habit_file, _ := ioutil.ReadFile(filename)
+		habit_file, err := ioutil.ReadFile(filename)
+		catch_error(err, "Error: Couldn't open habit file")
+
 		lines := strings.Split(string(habit_file), "\n")
 
 		// RICH_HOOK: filename last_completion old_streak cdate
@@ -138,7 +145,8 @@ func update_streak(filename string) {
 
 		// Reset streak
 		lines[1] = "0"
-		_ = ioutil.WriteFile(filename, []byte(strings.Join(lines, "\n")), 0644)
+		err = ioutil.WriteFile(filename, []byte(strings.Join(lines, "\n")), 0644)
+		catch_error(err, "Error: Couldn't write to habit file")
 	}
 }
 
@@ -214,7 +222,9 @@ func main() {
 
 		time_string := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
 		content := []byte(fmt.Sprintf("%v\n%v\n", time_string, streak))
-		_ = ioutil.WriteFile(full_path, content, 0644)
+		err = ioutil.WriteFile(full_path, content, 0644)
+
+		catch_error(err, "Error: Couldn't create habit file")
 
 		os.Exit(0)
 
@@ -227,17 +237,23 @@ func main() {
 			update_streak(full_path)
 
 			// Open habit file
-			habit_file, _ := ioutil.ReadFile(full_path)
+			habit_file, err := ioutil.ReadFile(full_path)
+			catch_error(err, "Error: Couldn't read habit file")
+
 			lines := strings.Split(string(habit_file), "\n")
 
 			// Update date
 			lines[0] = time.Now().Format("2006-01-02 MST")
 
 			// Increment streak
-			streak, _ := strconv.Atoi(lines[1])
+			streak, err := strconv.Atoi(lines[1])
+			catch_error(err, "Error: Invalid streak in habit file")
+
 			lines[1] = strconv.Itoa(streak + 1)
 
-			_ = ioutil.WriteFile(full_path, []byte(strings.Join(lines, "\n")), 0644)
+			err = ioutil.WriteFile(full_path, []byte(strings.Join(lines, "\n")), 0644)
+			catch_error(err, "Error: Couldn't write to habit file")
+
 			os.Exit(0)
 		}
 
