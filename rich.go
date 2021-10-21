@@ -195,10 +195,18 @@ func main() {
 	switch os.Args[1] {
 
 	case "new":
+		var err error
+
 		// Default streak
 		streak := 0
 		if len(os.Args) > 3 {
-			streak, _ = strconv.Atoi(os.Args[3])
+			streak, err = strconv.Atoi(os.Args[3])
+			catch_error(err, "Error: Invalid streak")
+
+			if streak < 0 {
+				fmt.Println("Error: Invalid streak")
+				os.Exit(1)
+			}
 		}
 
 		// We need yesterday - otherwise, if you set a streak, rich mark will reset it
