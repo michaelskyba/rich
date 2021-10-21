@@ -52,8 +52,10 @@ func get_digits(num int) int {
 }
 
 func get_line(filename string, i int) string {
-	file, _ := os.Open(filename)
+	file, err := os.Open(filename)
 	defer file.Close()
+
+	catch_error(err, "Error: Couldn't read habit file")
 
 	line := 0
 	scanner := bufio.NewScanner(file)
