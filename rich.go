@@ -229,32 +229,42 @@ func main() {
 		os.Exit(0)
 
 	case "mark":
-		if is_marked(full_path) {
-			fmt.Println("That habit has already been completed today.")
-			os.Exit(1)
+		// Iterate over every habit listed to mark
+		for i, habit := range os.Args {
 
-		} else {
-			update_streak(full_path)
+			// The 0th and 1st arguments are not habits
+			if i < 2 {
+				continue
+			}
 
-			// Open habit file
-			habit_file, err := ioutil.ReadFile(full_path)
-			catch_error(err, "Error: Couldn't read habit file")
+			// We can't use "full_path" because that's hardcoded to the first habit
+			mark_path := fmt.Sprintf("%v/%v", home_dir, habit)
 
-			lines := strings.Split(string(habit_file), "\n")
+			if is_marked(mark_path) {
+				fmt.Println("That habit has already been completed today.")
+				os.Exit(1)
 
-			// Update date
-			lines[0] = time.Now().Format("2006-01-02 MST")
+			} else {
+				update_streak(mark_path)
 
-			// Increment streak
-			streak, err := strconv.Atoi(lines[1])
-			catch_error(err, "Error: Invalid streak in habit file")
+				// Open habit file
+				habit_file, err := ioutil.ReadFile(mark_path)
+				catch_error(err, "Error: Couldn't read habit file")
 
-			lines[1] = strconv.Itoa(streak + 1)
+				lines := strings.Split(string(habit_file), "\n")
 
-			err = ioutil.WriteFile(full_path, []byte(strings.Join(lines, "\n")), 0644)
-			catch_error(err, "Error: Couldn't write to habit file")
+				// Update date
+				lines[0] = time.Now().Format("2006-01-02 MST")
 
-			os.Exit(0)
+				// Increment streak
+				streak, err := strconv.Atoi(lines[1])
+				catch_error(err, "Error: Invalid streak in habit file")
+
+				lines[1] = strconv.Itoa(streak + 1)
+
+				err = ioutil.WriteFile(mark_path, []byte(strings.Join(lines, "\n")), 0644)
+				catch_error(err, "Error: Couldn't write to habit file")
+			}
 		}
 
 	default:
