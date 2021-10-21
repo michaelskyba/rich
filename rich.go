@@ -226,8 +226,6 @@ func main() {
 
 		catch_error(err, "Error: Couldn't create habit file")
 
-		os.Exit(0)
-
 	case "mark":
 		// Iterate over every habit listed to mark
 		for i, habit := range os.Args {
