@@ -186,7 +186,7 @@ func main() {
 
 		os.Exit(0)
 
-	} else {
+	} else if len(os.Args) == 2 {
 		// e.g. "rich foo"
 		user_error()
 	}
