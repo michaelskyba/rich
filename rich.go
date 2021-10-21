@@ -241,8 +241,7 @@ func main() {
 			mark_path := fmt.Sprintf("%v/%v", home_dir, habit)
 
 			if is_marked(mark_path) {
-				fmt.Println("That habit has already been completed today.")
-				os.Exit(1)
+				fmt.Printf("'%v' has already been completed today.\n", habit)
 
 			} else {
 				update_streak(mark_path)
