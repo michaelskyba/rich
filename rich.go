@@ -27,7 +27,8 @@ func catch_error(err error, message string) {
 func user_error() {
 	fmt.Println(`Commands:
 rich new <habit name> [streak]
-rich mark <habit name>
+rich delete <habit name>
+rich mark <habit name> ...
 rich todo
 rich
 See the README for more information.`)
