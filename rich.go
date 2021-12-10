@@ -44,7 +44,7 @@ func get_digits(num int) int {
 	} else {
 		digits = 0
 		for num > 0 {
-			num  /= 10
+			num /= 10
 			digits++
 		}
 	}
