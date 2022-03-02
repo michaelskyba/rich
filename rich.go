@@ -102,7 +102,7 @@ func list(home_dir string) {
 		return habits[i].Length > habits[j].Length
 	})
 
-	// Find highest total streak
+	// Find number of digits for padding with spaces
 	var max int
 	for _, habit := range habits {
 		if habit.Length > max {
@@ -113,10 +113,7 @@ func list(home_dir string) {
 
 	// List info
 	for _, habit := range habits {
-		// Use digit information to decide on trailing spaces
-		trailing := strings.Repeat(" ", max_digits - get_digits(habit.Length))
-
-		fmt.Printf("%v%v - %v\n", trailing, habit.Length, habit.Name)
+		fmt.Printf("%*v - %v\n", max_digits, habit.Length, habit.Name)
 	}
 }
 
