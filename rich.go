@@ -30,7 +30,7 @@ rich new <habit name> [streak]
 rich delete <habit name>
 rich mark <habit name> ...
 rich todo
-rich
+rich [list]
 See the README for more information.`)
 
 	os.Exit(1)
@@ -168,7 +168,7 @@ func main() {
 	}
 
 	// list habits and streaks
-	if len(os.Args) == 1 {
+	if len(os.Args) == 1 || os.Args[1] == "list" {
 		list(home_dir)
 		os.Exit(0)
 
