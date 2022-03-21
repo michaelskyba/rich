@@ -2,8 +2,8 @@
 rich: a simple, streak-oriented, daily habit tracker written in Go
 
 ## Installation
-Clone the repo, run ``go build rich.go``, and then copy the resulting ``rich``
-binary into your $PATH.
+Clone the repo, run ``go build``, and then copy the resulting ``rich`` binary
+into your $PATH.
 
 ## Overview
 rich stores each habit in a file, where the name of the file is the same name
