@@ -1,0 +1,2 @@
+#!/bin/sh
+whiptail --title wealth --msgbox "wealth: an example GUI on top of rich" 10 50
