@@ -50,5 +50,5 @@ reimplement rich's late mark detection or keep backups of ``rich list`` output
 and check for zeros in the current output.
 
 ## wealth
-I've provided an example wrapper called (with its own README) in the wealth/
-directory.
+I've provided an example wrapper called (with its own README) in the
+[wealth/](https://github.com/michaelskyba/rich/tree/master/wealth) directory.
