@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"bufio"
+	"strings"
 )
 
 func hdl(err error) {
@@ -72,10 +73,8 @@ func main() {
 
 	ordered := getLines(filename2)
 	orderedHash := createHashTable(ordered)
-
 	unordered := getUnique(filename1, orderedHash)
 
-	fmt.Println(ordered)
-	fmt.Println(orderedHash)
-	fmt.Println(unordered)
+	fmt.Println(strings.Join(ordered, "\n"))
+	fmt.Println(strings.Join(unordered, "\n"))
 }
