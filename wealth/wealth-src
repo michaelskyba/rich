@@ -1,6 +1,5 @@
 #!/bin/sh
-config=${XDG_CONFIG_HOME:-$HOME/.config}
 fzf="--reverse"
 
 # Update any dates/forgets
-rich > /dev/null
+RICH_HOOK=./wealth-hook rich > /dev/null

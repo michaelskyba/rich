@@ -15,9 +15,8 @@ go build wealth-date.go
 su -c "cp wealth wealth-order wealth-create /usr/local/bin/"
 
 # Initial configuration setup
-config=${XDG_CONFIG_HOME:-$HOME/.config}
-mkdir -p $config/wealth
-ls $config/rich > $config/wealth/order
+mkdir -p $XDG_CONFIG_HOME/wealth
+ls $XDG_CONFIG_HOME/rich > $XDG_CONFIG_HOME/wealth/order
 ```
 
 ## Status

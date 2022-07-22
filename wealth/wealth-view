@@ -8,8 +8,8 @@ no_habits="You have not created any habits.
 Use the 'Create a new habit.' menu option to create one."
 
 habits=$(mktemp -u)
-ls "$config/rich" > "$habits"
-order=$config/wealth/order
+ls "$XDG_CONFIG_HOME/rich" > "$habits"
+order=$XDG_CONFIG_HOME/wealth/order
 
 list=$(./wealth-order "$habits" "$order")
 [ "$list" ] || echo "$no_habits"
