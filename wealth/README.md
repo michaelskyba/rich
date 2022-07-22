@@ -5,6 +5,20 @@ It's not expected to follow the UNIX philosophy. If you're one of the two people
 who are familiar with my other projects, ``wealth``'s relationship to ``rich`` is
 the same as ``shovel``'s to ``tunnel``.
 
+## Installation
+```sh
+cd /path/to/rich
+cd wealth
+
+go build wealth-order.go
+su -c "cp wealth wealth-order /usr/local/bin/"
+
+# Initial configuration setup
+config=${XDG_CONFIG_HOME:-$HOME/.config}
+mkdir -p $config/wealth
+ls $config/rich > $config/wealth/order
+```
+
 ## Status
 wealth is not in a usable state but is (probably) in development.
 
