@@ -13,9 +13,11 @@ order=$config/wealth/order
 list=$(./wealth-order $habits $order)
 [ "$list" ] || list=$no_habits
 
+today=$(./wealth-date)
+
 for habit in $list
 do
-	echo "A $habit A"
+	echo "$habit $today"
 done
 
 read
