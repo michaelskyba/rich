@@ -1,23 +1,33 @@
 #!/bin/sh -e
 . ./wealth-src
 clear
-echo
+echo "
+Your habits:"
 
 no_habits="You have not created any habits.
 Use the 'Create a new habit.' menu option to create one."
 
 habits=$(mktemp -u)
-ls $config/rich > "$habits"
+ls "$config/rich" > "$habits"
 order=$config/wealth/order
 
-list=$(./wealth-order $habits $order)
-[ "$list" ] || list=$no_habits
+list=$(./wealth-order "$habits" "$order")
+[ "$list" ] || echo "$no_habits"
 
 today=$(./wealth-date)
-
 for habit in $list
 do
-	echo "$habit $today"
+	file=$XDG_CONFIG_HOME/rich/$habit
+	[ ! -f "$file" ] &&
+		echo "ERR No such habit: $habit." &&
+		exit 1
+
+	status="[ ]"
+	[ "$today" = "$(head -1 $file)" ] && status="[X]"
+
+	echo "$status $habit"
 done
 
-read
+echo "
+Press Enter to return to the main menu."
+read pause
