@@ -3,8 +3,8 @@
 
 . ./wealth-src
 
-menu="
-Welcome to wealth. What would you like to do?
+menu="Welcome to wealth.
+What would you like to do?
 
 1. View habits.
 2. Create a new habit.
@@ -17,12 +17,12 @@ Welcome to wealth. What would you like to do?
 while :
 do
 	default=5
-	sel=$(whiptail --title "$title" --inputbox "$menu" $dim $default 3>&1 1>&2 2>&3)
+	sel=$(echo "$menu" | fzf $fzf --header-lines=3)
 
-	case "$sel" in
-		# Cancel
-		"") exit ;;
+	# Cancel
+	[ "$sel" ] || exit
 
+	case "${sel%%. *}" in
 		1) ./wealth-view ;;
 		2) exit ;;
 		3) exit ;;

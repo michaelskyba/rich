@@ -26,5 +26,4 @@ wealth is not in a usable state but is (probably) in development.
 - rich
 - Go
 - A shell that is at least somewhat POSIX-compliant
-- whiptail
-- fzf
+- fzf (used as a menu)
