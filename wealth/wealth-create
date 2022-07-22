@@ -1,0 +1,29 @@
+#!/bin/sh
+. ./wealth-src
+msg="Enter a name for your habit.
+Press ESC to cancel."
+
+success() {
+	rich new "$name"
+
+	echo "Successfully created the '$name' habit."
+	echo "Press Enter to return to the main menu."
+	read
+	exit
+}
+
+while :
+do
+	clear
+	name=$(echo "$msg" | fzf $fzf --header-lines=2 --print-query)
+
+	exists=
+	[ -f $XDG_CONFIG_HOME/rich/$name ] && exists=1
+	[ "$exists" ] &&
+		echo &&
+		echo "A habit called '$name' already exists." &&
+		echo "Press Enter to pick a new name." &&
+		read
+
+	[ "$exists" ] || success
+done

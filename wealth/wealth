@@ -24,7 +24,7 @@ do
 
 	case "${sel%%. *}" in
 		1) ./wealth-view ;;
-		2) exit ;;
+		2) ./wealth-create ;;
 		3) exit ;;
 		4) exit ;;
 		5) exit ;;
