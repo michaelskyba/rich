@@ -12,7 +12,7 @@ cd wealth
 
 go build wealth-order.go
 go build wealth-date.go
-su -c "cp wealth wealth-order /usr/local/bin/"
+su -c "cp wealth wealth-order wealth-create /usr/local/bin/"
 
 # Initial configuration setup
 config=${XDG_CONFIG_HOME:-$HOME/.config}

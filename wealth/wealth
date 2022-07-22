@@ -25,7 +25,7 @@ do
 	case "${sel%%. *}" in
 		1) ./wealth-view ;;
 		2) ./wealth-create ;;
-		3) exit ;;
+		3) $EDITOR $XDG_CONFIG_HOME/wealth/order ;;
 		4) exit ;;
 		5) exit ;;
 		6) exit ;;
