@@ -1,0 +1,6 @@
+#!/bin/sh
+
+title="wealth: an example GUI on top of rich"
+
+# Dimensions: "<height> <width>"
+dim="25 78"

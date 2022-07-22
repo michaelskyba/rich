@@ -1,2 +1,36 @@
 #!/bin/sh
-whiptail --title wealth --msgbox "wealth: an example GUI on top of rich" 10 50
+. ./wealth-src
+
+# https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail
+
+menu="
+Welcome to wealth. What would you like to do?
+
+1. View habits.
+2. Create a new habit.
+3. Edit habit order.
+4. Handle forgotten habits.
+5. Mark habits that are uncompleted today.
+6. Toggle habit completion.
+"
+
+while :
+do
+	default=5
+	sel=$(whiptail --title "$title" --inputbox "$menu" $dim $default 3>&1 1>&2 2>&3)
+
+	case "$sel" in
+		# Cancel
+		"") exit ;;
+
+		1) exit ;;
+		2) exit ;;
+		3) exit ;;
+		4) exit ;;
+		5) exit ;;
+		6) exit ;;
+
+		# Invalid input
+		*) exit ;;
+	esac
+done
