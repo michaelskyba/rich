@@ -16,6 +16,7 @@ func hdl(err error) {
 
 func getLines(filename string) []string {
 	file, err := os.Open(filename)
+	defer file.Close()
 	hdl(err)
 
 	scanner := bufio.NewScanner(file)
@@ -47,15 +48,34 @@ func createHashTable(lines []string) map[string]bool {
 	return seen
 }
 
+func getUnique(filename string, seen map[string]bool) []string {
+	file, err := os.Open(filename)
+	defer file.Close()
+	hdl(err)
+
+	scanner := bufio.NewScanner(file)
+	unique := []string{}
+
+	for scanner.Scan() {
+		text := scanner.Text()
+		if !seen[text] {
+			unique = append(unique, text)
+		}
+	}
+
+	return unique
+}
+
 func main() {
 	filename1 := os.Args[1]
 	filename2 := os.Args[2]
 
-	fmt.Println(filename1, filename2)
-
 	ordered := getLines(filename2)
 	orderedHash := createHashTable(ordered)
 
+	unordered := getUnique(filename1, orderedHash)
+
 	fmt.Println(ordered)
 	fmt.Println(orderedHash)
+	fmt.Println(unordered)
 }
