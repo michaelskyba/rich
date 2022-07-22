@@ -48,3 +48,7 @@ but forgot to mark it so now it has been reset).
 Without a hook, both of these would be annoying to carry out. You would have to
 reimplement rich's late mark detection or keep backups of ``rich list`` output
 and check for zeros in the current output.
+
+## wealth
+I've provided an example wrapper called (with its own README) in the wealth/
+directory.
