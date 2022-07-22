@@ -1,5 +1,5 @@
 #!/bin/sh
-
+config=${XDG_CONFIG_HOME:-$HOME/.config}
 title="wealth: an example GUI on top of rich"
 
 # Dimensions: "<height> <width>"

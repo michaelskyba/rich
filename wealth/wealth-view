@@ -1,0 +1,14 @@
+#!/bin/sh -e
+. ./wealth-src
+
+no_habits="You have not created any habits.
+Use the 'Create a new habit.' menu option to create one."
+
+habits=$(mktemp -u)
+ls $config/rich > "$habits"
+order=$config/wealth/order
+
+list=$(./wealth-order $habits $order)
+[ "$list" ] || list=$no_habits
+
+whiptail --title "$title" --msgbox "$list" $dim
