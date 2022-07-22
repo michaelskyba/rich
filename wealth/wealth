@@ -12,7 +12,7 @@ What would you like to do?
 4. Handle forgotten habits.
 5. Mark habits that are uncompleted today.
 6. Toggle habit completion.
-"
+7. Exit the program."
 
 while :
 do
@@ -29,6 +29,7 @@ do
 		4) exit ;;
 		5) exit ;;
 		6) exit ;;
+		7) exit ;;
 
 		# Invalid input
 		*) exit ;;
