@@ -1,4 +1,6 @@
 #!/bin/sh
+. ./wealth-src
+
 update_forgot() {
 	mv "$new_forgot" "$config/forgot"
 }
@@ -36,7 +38,7 @@ Previous count : $count
 - Press ESC to cancel."
 
 	clear
-	sel=$(echo "$header" | fzf --reverse --header-lines=10 --print-query --bind "esc:execute(echo exit)+abort")
+	sel=$(echo "$header" | fzf $fzf --header-lines=10 --print-query --bind "esc:execute(echo exit)+abort")
 
 	# Escape: cancel
 	[ "$sel" = exit ] &&

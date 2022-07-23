@@ -27,7 +27,7 @@ do
 		2) ./wealth-create ;;
 		3) $EDITOR $XDG_CONFIG_HOME/wealth/order ;;
 		4) ./wealth-forgot ;;
-		5) exit ;;
+		5) ./wealth-mark ;;
 		6) exit ;;
 		7) exit ;;
 

@@ -12,7 +12,7 @@ cd wealth
 
 go build wealth-order.go
 go build wealth-date.go
-su -c "cp wealth wealth-order wealth-create /usr/local/bin/"
+su -c "cp wealth wealth-* /usr/local/bin/"
 
 # Initial configuration setup
 mkdir -p $XDG_CONFIG_HOME/wealth
@@ -25,5 +25,5 @@ wealth is not in a usable state but is (probably) in development.
 ## Dependencies
 - rich
 - Go
-- A shell that is at least somewhat POSIX-compliant
 - fzf (used as a menu)
+- Basics like coreutils and a shell that is at least somewhat POSIX-compliant

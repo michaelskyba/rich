@@ -1,0 +1,5 @@
+#!/bin/sh
+. ./wealth-src
+
+rich todo
+read pause
