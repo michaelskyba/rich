@@ -1,0 +1,37 @@
+#!/bin/sh
+. ./wealth-src
+
+case "$1" in
+	order)
+		habits=$(mktemp -u)
+		ls "$XDG_CONFIG_HOME/rich" > "$habits"
+		order=$XDG_CONFIG_HOME/wealth/order
+
+		output=$(mktemp -u)
+		./wealth-order "$habits" "$order" | sed "/^\$/d" > "$output"
+		echo "$output" ;;
+
+	toggle)
+		order=$(./wealth-gen order)
+		todo=$(mktemp -u)
+		toggle=$(mktemp -u)
+		rich todo > "$todo"
+
+		while read -r habit
+		do
+			is_todo=
+			grep -q "$habit" "$todo" && is_todo=1
+			[ "$is_todo" ] && status="[ ]"
+			[ "$is_todo" ] || status="[X]"
+
+			count=$(tail -1 "$XDG_CONFIG_HOME/rich/$habit")
+
+			echo "$status [$count]	$habit" >> "$toggle"
+		done < "$order"
+
+		echo "$toggle" ;;
+
+	*)
+		echo "ERR Invalid usage"
+		exit 1 ;;
+esac
