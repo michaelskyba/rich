@@ -1,5 +1,45 @@
 #!/bin/sh
 . ./wealth-src
 
-rich todo
-read pause
+todo=$(mktemp -u)
+rich todo > "$todo"
+
+# Order
+ordered_todo=$(mktemp -u)
+while read -r habit
+do
+	grep "$habit" "$todo" >> "$ordered_todo"
+done < "$XDG_CONFIG_HOME/wealth/order"
+
+parsed_todo=$(mktemp -u)
+while read -r habit
+do
+	count=$(tail -1 "$XDG_CONFIG_HOME/rich/$habit")
+	echo "[$count]	$habit" >> "$parsed_todo"
+done < "$ordered_todo"
+
+[ ! -f "$parsed_todo" ] &&
+	echo "You do not have any habits to complete." &&
+	echo "Press Enter to return to the main menu." &&
+	read pause &&
+	exit
+
+gen_header() {
+	echo "These habits have not been completed today.
+Selecting one will mark it as complete.
+Press ESC to return to the main menu.
+
+$(cat $parsed_todo)"
+}
+
+
+while :
+do
+	sel=$(gen_header | fzf $fzf --header-lines=4)
+	[ "$sel" ] || break
+	sel=${sel##*	}
+
+	echo "$sel"
+	rich mark "$sel"
+	sed -i "/\t$sel$/d" "$parsed_todo"
+done
