@@ -30,8 +30,5 @@ do
 		5) ./wealth-mark ;;
 		6) ./wealth-toggle ;;
 		7) exit ;;
-
-		# Invalid input
-		*) exit ;;
 	esac
 done
