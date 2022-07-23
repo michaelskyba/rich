@@ -1,5 +1,5 @@
 #!/bin/sh
-fzf="--reverse"
+fzf="--reverse --bind=tab:down,btab:up,alt-k:up,alt-j:down --cycle"
 no_habits="You have not created any habits.
 Use the 'Create a new habit.' menu option to create one."
 
