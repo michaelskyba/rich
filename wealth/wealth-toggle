@@ -1,8 +1,8 @@
 #!/bin/sh
-. ./wealth-src
+. wealth-src
 
 gen_menu() {
-	file=$(./wealth-gen toggle)
+	file=$(wealth-gen toggle)
 	[ -f "$file" ] && toggle=$(cat "$file")
 
 	[ "$toggle" ] || echo "$no_habits"

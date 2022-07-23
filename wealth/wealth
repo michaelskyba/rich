@@ -1,7 +1,7 @@
 #!/bin/sh -e
 # https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail
 
-. ./wealth-src
+. wealth-src
 
 menu="Welcome to wealth.
 What would you like to do?
@@ -23,12 +23,12 @@ do
 	[ "$sel" ] || exit
 
 	case "${sel%%. *}" in
-		1) ./wealth-view ;;
-		2) ./wealth-create ;;
+		1) wealth-view ;;
+		2) wealth-create ;;
 		3) $EDITOR $XDG_CONFIG_HOME/wealth/order ;;
-		4) ./wealth-forgot ;;
-		5) ./wealth-mark ;;
-		6) ./wealth-toggle ;;
+		4) wealth-forgot ;;
+		5) wealth-mark ;;
+		6) wealth-toggle ;;
 		7) exit ;;
 	esac
 done

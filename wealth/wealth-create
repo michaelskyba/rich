@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./wealth-src
+. wealth-src
 msg="Enter a name for your habit.
 Press ESC to cancel."
 

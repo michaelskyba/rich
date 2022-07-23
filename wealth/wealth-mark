@@ -1,10 +1,10 @@
 #!/bin/sh
-. ./wealth-src
+. wealth-src
 
 todo=$(mktemp -u)
 rich todo > "$todo"
 
-order=$(./wealth-gen order)
+order=$(wealth-gen order)
 ordered_todo=$(mktemp -u)
 while read -r habit
 do

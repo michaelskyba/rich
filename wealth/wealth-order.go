@@ -1,6 +1,6 @@
 package main
 
-// Internal usage: ./wealth-order <habit list file> <order file>
+// Internal usage: wealth-order <habit list file> <order file>
 
 import (
 	"fmt"

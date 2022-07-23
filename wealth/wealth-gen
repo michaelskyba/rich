@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./wealth-src
+. wealth-src
 
 case "$1" in
 	order)
@@ -8,11 +8,11 @@ case "$1" in
 		order=$XDG_CONFIG_HOME/wealth/order
 
 		output=$(mktemp -u)
-		./wealth-order "$habits" "$order" | sed "/^\$/d" > "$output"
+		wealth-order "$habits" "$order" | sed "/^\$/d" > "$output"
 		echo "$output" ;;
 
 	toggle)
-		order=$(./wealth-gen order)
+		order=$(wealth-gen order)
 		todo=$(mktemp -u)
 		toggle=$(mktemp -u)
 		rich todo > "$todo"

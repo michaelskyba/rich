@@ -1,5 +1,5 @@
 #!/bin/sh
-. ./wealth-src
+. wealth-src
 
 update_forgot() {
 	mv "$new_forgot" "$config/forgot"
@@ -15,7 +15,7 @@ config=$XDG_CONFIG_HOME/wealth
 while read -r habit
 do
 	grep ",$habit," "$config/forgot" >> "$ordered_forgot"
-done < "$(./wealth-gen order)"
+done < "$(wealth-gen order)"
 
 new_forgot=$(mktemp -u)
 cp "$config/forgot" "$new_forgot"
