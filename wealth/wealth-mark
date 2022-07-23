@@ -19,6 +19,7 @@ do
 done < "$ordered_todo"
 
 [ ! -f "$parsed_todo" ] &&
+	clear &&
 	echo "You do not have any habits to complete." &&
 	echo "Press Enter to return to the main menu." &&
 	read pause &&
