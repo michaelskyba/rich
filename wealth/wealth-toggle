@@ -1,37 +1,19 @@
 #!/bin/sh
 . ./wealth-src
 
-todo=$(mktemp -u)
-toggle=$(mktemp -u)
-
-gen_toggle() {
-	rich todo > "$todo"
-	rm -f "$toggle"
-
-	while read -r habit
-	do
-		is_todo=
-		grep "$habit" "$todo" && is_todo=1
-		[ "$is_todo" ] && status="[ ]"
-		[ "$is_todo" ] || status="[X]"
-
-		count=$(tail -1 "$XDG_CONFIG_HOME/rich/$habit")
-
-		echo "$status [$count]	$habit" >> "$toggle"
-	done < "$XDG_CONFIG_HOME/wealth/order"
-}
-
 gen_menu() {
-	echo "[X]: Completed today
+	file=$(./wealth-gen toggle)
+	[ -f "$file" ] && toggle=$(cat "$file")
+
+	[ "$toggle" ] || echo "$no_habits"
+	[ "$toggle" ] && echo "[X]: Completed today
 [ ]: Not completed today
 
 Select a habit to toggle completion.
 Press ESC to return to the main menu.
 
-$(cat $toggle)"
+$toggle"
 }
-
-gen_toggle
 
 while :
 do
@@ -45,8 +27,5 @@ do
 		count=${count%%	*} &&
 		count=$(echo "$count" | sed "s/[][]//g") &&
 		rich delete "$habit" &&
-		echo "$count" &&
 		rich new "$habit" "$((count-1))"
-
-	gen_toggle
 done
