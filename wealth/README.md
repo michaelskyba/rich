@@ -19,7 +19,7 @@ ls $XDG_CONFIG_HOME/rich > $XDG_CONFIG_HOME/wealth/order
 ```
 
 ## Status
-wealth is probably in a usable state but I haven't done much testing yet,
+wealth is mostly in a usable state but I haven't done much testing yet,
 especially for abstract edge cases.
 
 ## Dependencies
@@ -27,3 +27,6 @@ especially for abstract edge cases.
 - Go
 - fzf (used as a menu and a prompt)
 - Basics like coreutils and a shell that is at least somewhat POSIX-compliant
+
+## TODO
+- Add error message on forgotten habits screen if there are none
