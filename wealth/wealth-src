@@ -1,5 +1,7 @@
 #!/bin/sh
 fzf="--reverse"
+no_habits="You have not created any habits.
+Use the 'Create a new habit.' menu option to create one."
 
 # Update any dates/forgets
 RICH_HOOK=./wealth-hook rich > /dev/null

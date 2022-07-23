@@ -1,32 +1,15 @@
 #!/bin/sh -e
 . ./wealth-src
+
 clear
-echo "
-Your habits:"
+file=$(./wealth-gen toggle)
+[ -f "$file" ] && toggle=$(cat "$file")
 
-no_habits="You have not created any habits.
-Use the 'Create a new habit.' menu option to create one."
-
-habits=$(mktemp -u)
-ls "$XDG_CONFIG_HOME/rich" > "$habits"
-order=$XDG_CONFIG_HOME/wealth/order
-
-list=$(./wealth-order "$habits" "$order")
-[ "$list" ] || echo "$no_habits"
-
-today=$(./wealth-date)
-for habit in $list
-do
-	file=$XDG_CONFIG_HOME/rich/$habit
-	[ ! -f "$file" ] &&
-		echo "ERR No such habit: $habit." &&
-		exit 1
-
-	status="[ ]"
-	[ "$today" = "$(head -1 $file)" ] && status="[X]"
-
-	echo "$status $habit"
-done
+[ "$toggle" ] || echo "$no_habits"
+[ "$toggle" ] &&
+	echo "
+Your habits:
+$toggle"
 
 echo "
 Press Enter to return to the main menu."

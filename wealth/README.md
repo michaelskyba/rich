@@ -11,7 +11,6 @@ cd /path/to/rich
 cd wealth
 
 go build wealth-order.go
-go build wealth-date.go
 su -c "cp wealth wealth-* /usr/local/bin/"
 
 # Initial configuration setup
