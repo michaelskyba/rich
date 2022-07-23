@@ -15,7 +15,7 @@ config=$XDG_CONFIG_HOME/wealth
 while read -r habit
 do
 	grep ",$habit," "$config/forgot" >> "$ordered_forgot"
-done < "$config/order"
+done < "$(./wealth-gen order)"
 
 new_forgot=$(mktemp -u)
 cp "$config/forgot" "$new_forgot"
