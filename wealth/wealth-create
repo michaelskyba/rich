@@ -5,6 +5,7 @@ Press ESC to cancel."
 
 success() {
 	rich new "$name" || exit 1
+	echo "$name" >> "$XDG_CONFIG_HOME/wealth/order"
 
 	echo "Successfully created the '$name' habit."
 	echo "Press Enter to return to the main menu."

@@ -20,7 +20,7 @@ case "$1" in
 		while read -r habit
 		do
 			is_todo=
-			grep -q "$habit" "$todo" && is_todo=1
+			grep -q "^$habit\$" "$todo" && is_todo=1
 			[ "$is_todo" ] && status="[ ]"
 			[ "$is_todo" ] || status="[X]"
 

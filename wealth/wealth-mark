@@ -8,7 +8,7 @@ order=$(./wealth-gen order)
 ordered_todo=$(mktemp -u)
 while read -r habit
 do
-	grep "$habit" "$todo" >> "$ordered_todo"
+	grep "^$habit\$" "$todo" >> "$ordered_todo"
 done < "$order"
 
 parsed_todo=$(mktemp -u)
