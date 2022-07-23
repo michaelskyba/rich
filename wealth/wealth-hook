@@ -11,4 +11,4 @@ echo "$RANDOM $name" > "$tmp"
 id=$(md5sum "$tmp")
 id=${id%% *}
 
-echo "$id\t$name\t$date\t$number" >> $XDG_CONFIG_HOME/wealth/forgot
+echo "$id,$name,$date,$number" >> $XDG_CONFIG_HOME/wealth/forgot

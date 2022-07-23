@@ -1,0 +1,69 @@
+#!/bin/sh
+update_forgot() {
+	mv "$new_forgot" "$config/forgot"
+}
+
+remove_forgot() {
+	sed -i "/^$id,/d" "$new_forgot"
+}
+
+ordered_forgot=$(mktemp -u)
+config=$XDG_CONFIG_HOME/wealth
+
+while read -r habit
+do
+	grep ",$habit," "$config/forgot" >> "$ordered_forgot"
+done < "$config/order"
+
+new_forgot=$(mktemp -u)
+cp "$config/forgot" "$new_forgot"
+
+while read -r habit
+do
+	id=$(echo "$habit" | cut -d"," -f 1)
+	name=$(echo "$habit" | cut -d"," -f 2)
+	date=$(echo "$habit" | cut -d"," -f 3)
+	count=$(echo "$habit" | cut -d"," -f 4)
+
+	header="Forgotten habit: $name
+Last completion: $date
+Previous count : $count
+
+- Enter an integer to modify the previous count by that number.
+	For example, submitting '-2' would set the count to $((count-2)).
+- Enter 'r' to reset the count to zero.
+- Leave the entry blank and press Enter to skip to the next habit.
+- Press ESC to cancel."
+
+	clear
+	sel=$(echo "$header" | fzf --reverse --header-lines=10 --print-query --bind "esc:execute(echo exit)+abort")
+
+	# Escape: cancel
+	[ "$sel" = exit ] &&
+		update_forgot &&
+		exit
+
+	# Skip
+	[ -z "$sel" ] && continue
+
+	# Reset
+	[ "$sel" = r ] &&
+		rich delete "$name" &&
+		rich new "$name" &&
+		remove_forgot &&
+		continue
+
+	# Number: valid
+	echo "$sel" | grep -q "^-\?[0-9]\+$" &&
+		rich delete "$name" &&
+		rich new "$name" "$((count+sel))" &&
+		remove_forgot &&
+		continue
+
+	# No other cases matched
+	echo "ERR Invalid input '$sel'"
+	update_forgot
+	exit 1
+done < "$ordered_forgot"
+
+update_forgot

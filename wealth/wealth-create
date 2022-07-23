@@ -8,7 +8,7 @@ success() {
 
 	echo "Successfully created the '$name' habit."
 	echo "Press Enter to return to the main menu."
-	read
+	read pause
 	exit
 }
 
@@ -23,7 +23,7 @@ do
 		echo &&
 		echo "A habit called '$name' already exists." &&
 		echo "Press Enter to pick a new name." &&
-		read
+		read pause
 
 	[ "$exists" ] || success
 done
