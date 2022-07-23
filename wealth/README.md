@@ -19,16 +19,11 @@ ls $XDG_CONFIG_HOME/rich > $XDG_CONFIG_HOME/wealth/order
 ```
 
 ## Status
-wealth is not in a usable state but is (probably) in development.
+wealth is probably in a usable state but I haven't done much testing yet,
+especially for abstract edge cases.
 
 ## Dependencies
 - rich
 - Go
-- fzf (used as a menu)
+- fzf (used as a menu and a prompt)
 - Basics like coreutils and a shell that is at least somewhat POSIX-compliant
-
-## TODO
-- Make sure you're always using wealth-order instead of the raw order file
-- Make sure you use grep unambiguously
-	e.g. if you have a habit called "exercise", it shouldn't be matched for
-	"exercise-run"
