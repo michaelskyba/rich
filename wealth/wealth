@@ -28,7 +28,7 @@ do
 		3) $EDITOR $XDG_CONFIG_HOME/wealth/order ;;
 		4) ./wealth-forgot ;;
 		5) ./wealth-mark ;;
-		6) exit ;;
+		6) ./wealth-toggle ;;
 		7) exit ;;
 
 		# Invalid input

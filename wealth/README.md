@@ -27,3 +27,9 @@ wealth is not in a usable state but is (probably) in development.
 - Go
 - fzf (used as a menu)
 - Basics like coreutils and a shell that is at least somewhat POSIX-compliant
+
+## TODO
+- Make sure you're always using wealth-order instead of the raw order file
+- Make sure you use grep unambiguously
+	e.g. if you have a habit called "exercise", it shouldn't be matched for
+	"exercise-run"

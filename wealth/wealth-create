@@ -4,7 +4,7 @@ msg="Enter a name for your habit.
 Press ESC to cancel."
 
 success() {
-	rich new "$name"
+	rich new "$name" || exit 1
 
 	echo "Successfully created the '$name' habit."
 	echo "Press Enter to return to the main menu."
@@ -16,6 +16,7 @@ while :
 do
 	clear
 	name=$(echo "$msg" | fzf $fzf --header-lines=2 --print-query)
+	[ "$name" ] || break
 
 	exists=
 	[ -f $XDG_CONFIG_HOME/rich/$name ] && exists=1
