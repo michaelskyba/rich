@@ -28,5 +28,12 @@ especially for abstract edge cases.
 - fzf (used as a menu and a prompt)
 - Basics like coreutils and a shell that is at least somewhat POSIX-compliant
 
+## Example screenshot
+![screenshot](https://raw.githubusercontent.com/michaelskyba/rich/master/wealth/assets/screenshot.webp)
+
+(Of the "Toggle habit completion." screen)
+
 ## TODO
 - Add error message on forgotten habits screen if there are none
+- Improve the UI consistency (e.g. right now there is an echo "no habits" screen
+and a fzf "no habits" screen, which makes no sense)
