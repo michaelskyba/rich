@@ -12,31 +12,31 @@ type Streak struct {
 	Length int
 }
 
-func list(home_dir string) {
+func list(homeDir string) {
 	// Get habit names
-	habit_files, err := ioutil.ReadDir(home_dir)
-	catch_error(err, "Error: Invalid home directory")
+	habitFiles, err := ioutil.ReadDir(homeDir)
+	catchError(err, "Error: Invalid home directory")
 
-	var habit_filenames []string
-	for _, habit_file := range habit_files {
-		habit_filenames = append(habit_filenames, habit_file.Name())
+	var habitFilenames []string
+	for _, habitFile := range habitFiles {
+		habitFilenames = append(habitFilenames, habitFile.Name())
 	}
 
 	// Reset lost streaks
-	for _, habit_filename := range habit_filenames {
-		full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
-		update_streak(full_path)
+	for _, habitFilename := range habitFilenames {
+		fullPath := fmt.Sprintf("%v/%v", homeDir, habitFilename)
+		updateStreak(fullPath)
 	}
 
 	// Get habit streaks
 	var habits []Streak
-	for _, habit_filename := range habit_filenames {
-		full_path := fmt.Sprintf("%v/%v", home_dir, habit_filename)
+	for _, habitFilename := range habitFilenames {
+		fullPath := fmt.Sprintf("%v/%v", homeDir, habitFilename)
 
-		streak, err := strconv.Atoi(get_line(full_path, 1))
-		catch_error(err, "Error: Invalid streak in habit file")
+		streak, err := strconv.Atoi(getLine(fullPath, 1))
+		catchError(err, "Error: Invalid streak in habit file")
 
-		habits = append(habits, Streak{habit_filename, streak})
+		habits = append(habits, Streak{habitFilename, streak})
 	}
 
 	// Sort habits based on streak lengths
@@ -51,10 +51,10 @@ func list(home_dir string) {
 			max = habit.Length
 		}
 	}
-	max_digits := get_digits(max)
+	maxDigits := getDigits(max)
 
 	// List info
 	for _, habit := range habits {
-		fmt.Printf("%*v - %v\n", max_digits, habit.Length, habit.Name)
+		fmt.Printf("%*v - %v\n", maxDigits, habit.Length, habit.Name)
 	}
 }
