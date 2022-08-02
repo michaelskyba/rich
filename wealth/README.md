@@ -18,6 +18,30 @@ mkdir -p $XDG_CONFIG_HOME/wealth
 ls $XDG_CONFIG_HOME/rich > $XDG_CONFIG_HOME/wealth/order
 ```
 
+## Order file syntax
+The order file controls the habit order in menus. Each line should either be
+blank, a comment, or the filename of a habit. Here is a valid example.
+
+The habits:
+```sh
+$ ls $XDG_CONFIG_HOME/rich
+2500ml_water
+30m_treadmill
+no_homicide
+```
+
+The order file:
+```
+# Passive habits
+no_homicide
+
+# Active habits
+2500ml_water
+30m_treadmill
+```
+As you can see, comments are lines that start with ``#``. ``x # y`` is not a
+valid comment.
+
 ## Status
 wealth is mostly in a usable state but I haven't done much testing yet,
 especially for abstract edge cases.

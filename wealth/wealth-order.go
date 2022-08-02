@@ -24,7 +24,10 @@ func getLines(filename string) []string {
 	lines := []string{}
 
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		text := scanner.Text()
+		if text != "" && text[0] != '#' {
+			lines = append(lines, text)
+		}
 	}
 
 	return lines
