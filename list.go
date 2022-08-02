@@ -15,7 +15,7 @@ type Streak struct {
 func list(homeDir string) {
 	// Get habit names
 	habitFiles, err := ioutil.ReadDir(homeDir)
-	catchError(err, "Error: Invalid home directory")
+	hdl(err, "Error: Invalid home directory")
 
 	var habitFilenames []string
 	for _, habitFile := range habitFiles {
@@ -34,7 +34,7 @@ func list(homeDir string) {
 		fullPath := fmt.Sprintf("%v/%v", homeDir, habitFilename)
 
 		streak, err := strconv.Atoi(getLine(fullPath, 1))
-		catchError(err, "Error: Invalid streak in habit file")
+		hdl(err, "Error: Invalid streak in habit file")
 
 		habits = append(habits, Streak{habitFilename, streak})
 	}

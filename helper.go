@@ -6,23 +6,25 @@ import (
 	"bufio"
 )
 
-func catchError(err error, message string) {
+func hdl(err error, message string) {
 	if err != nil {
-		fmt.Println(message)
-		os.Exit(1)
+		printError(message)
 	}
 }
 
+func printError(message string) {
+	fmt.Fprintln(os.Stderr, message)
+	os.Exit(1)
+}
+
 func userError() {
-	fmt.Println(`Commands:
+	printError(`Commands:
 rich new <habit name> [streak]
 rich delete <habit name>
 rich mark <habit name> ...
 rich todo
 rich [list]
 See the README for more information.`)
-
-	os.Exit(1)
 }
 
 func getDigits(num int) int {
@@ -45,7 +47,7 @@ func getLine(filename string, i int) string {
 	file, err := os.Open(filename)
 	defer file.Close()
 
-	catchError(err, "Error: Couldn't read habit file")
+	hdl(err, "Error: Couldn't read habit file")
 
 	line := 0
 	scanner := bufio.NewScanner(file)
