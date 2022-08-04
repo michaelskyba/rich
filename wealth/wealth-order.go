@@ -3,9 +3,9 @@ package main
 // Internal usage: wealth-order <habit list file> <order file>
 
 import (
+	"bufio"
 	"fmt"
 	"os"
-	"bufio"
 	"strings"
 )
 
@@ -25,6 +25,8 @@ func getLines(filename string) []string {
 
 	for scanner.Scan() {
 		text := scanner.Text()
+
+		// Only include the line if it isn't a comment
 		if text != "" && text[0] != '#' {
 			lines = append(lines, text)
 		}

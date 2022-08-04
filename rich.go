@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
-	"io/ioutil"
 	"strconv"
 	"strings"
 	"time"
@@ -12,7 +12,6 @@ import (
 
 // Reset streak if past due date
 func updateStreak(filename string) {
-
 	// Get time from habit file
 	habitTime, err := time.Parse("2006-01-02 MST", getLine(filename, 0))
 	hdl(err, "Error: Invalid date in habit file")
@@ -20,7 +19,6 @@ func updateStreak(filename string) {
 	// Has due date passed? (is current time > habitTime + 2 days?)
 	currentTime := time.Now()
 	if currentTime.After(habitTime.AddDate(0, 0, 2)) {
-
 		habitFile, err := ioutil.ReadFile(filename)
 		hdl(err, "Error: Couldn't open habit file")
 
@@ -66,7 +64,6 @@ func main() {
 		os.Exit(0)
 
 	} else if os.Args[1] == "todo" {
-
 		// Get habit names
 		habitFiles, err := ioutil.ReadDir(homeDir)
 		hdl(err, "Error: Invalid home directory")
@@ -125,7 +122,6 @@ func main() {
 	case "mark":
 		// Iterate over every habit listed to mark
 		for i, habit := range os.Args {
-
 			// The 0th and 1st arguments are not habits
 			if i < 2 {
 				continue

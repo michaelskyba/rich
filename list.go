@@ -1,14 +1,14 @@
 package main
 
 import (
-	"io/ioutil"
 	"fmt"
-	"strconv"
+	"io/ioutil"
 	"sort"
+	"strconv"
 )
 
 type Streak struct {
-	Name string
+	Name   string
 	Length int
 }
 
