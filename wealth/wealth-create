@@ -1,10 +1,16 @@
 #!/bin/sh
 . wealth-src
-msg="Enter a name for your habit.
+
+name_message="Enter a name for your habit.
 Press ESC to cancel."
 
+init_streak_message="What is your current streak for this habit?
+Default: 0."
+
 success() {
-	rich new "$name" || exit 1
+	# $init_streak should be unquoted so that an empty value isn't taken as an
+	# argument ("")
+	rich new "$name" $init_streak || exit 1
 	echo "$name" >> "$XDG_CONFIG_HOME/wealth/order"
 
 	echo "Successfully created the '$name' habit."
@@ -16,16 +22,18 @@ success() {
 while :
 do
 	clear
-	name=$(echo "$msg" | fzf $fzf --header-lines=2 --print-query)
+	name=$(echo "$name_message" | fzf $fzf --header-lines=2 --print-query)
 	[ "$name" ] || break
 
 	exists=
-	[ -f $XDG_CONFIG_HOME/rich/$name ] && exists=1
+	[ -f "$XDG_CONFIG_HOME/rich/$name" ] && exists=1
 	[ "$exists" ] &&
 		echo &&
 		echo "A habit called '$name' already exists." &&
 		echo "Press Enter to pick a new name." &&
 		read pause
+
+	init_streak=$(echo "$init_streak_message" | fzf $fzf --header-lines=2 --print-query)
 
 	[ "$exists" ] || success
 done
