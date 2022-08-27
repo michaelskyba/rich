@@ -57,17 +57,16 @@ func list(homeDir string) {
 	}
 	maxDigits := getDigits(max)
 
-	// List info
 	for _, habit := range habits {
 		fmt.Printf("%*v - %v\n", maxDigits, habit.Length, habit.Name)
 	}
 }
 
 func todoAll(homeDir string) {
-	// Get habit names
 	habitFiles, err := ioutil.ReadDir(homeDir)
 	hdl(err, "Error: Invalid home directory")
 
+	// Get habit names
 	var habitFilenames []string
 	for _, habitFile := range habitFiles {
 		habitFilenames = append(habitFilenames, habitFile.Name())
@@ -97,8 +96,8 @@ func createHabit(habitPath string, argsLen int) {
 		}
 	}
 
-	// We need yesterday - otherwise, if you set a streak, rich mark will reset it
-	// It will think the streak was in the past
+	// We need to set yesterday as the initial date. Otherwise, if you set a
+	// streak, rich mark will reset it, thinking that the streak was in the past.
 
 	timeString := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
 	content := []byte(fmt.Sprintf("%v\n%v\n", timeString, streak))
@@ -108,7 +107,6 @@ func createHabit(habitPath string, argsLen int) {
 }
 
 func markHabit(homeDir string) {
-	// Iterate over every habit listed to mark
 	for i, habit := range os.Args {
 		// The 0th and 1st arguments are not habits
 		if i < 2 {
@@ -123,7 +121,6 @@ func markHabit(homeDir string) {
 		} else {
 			updateStreak(habitPath)
 
-			// Open habit file
 			habitFile, err := ioutil.ReadFile(habitPath)
 			hdl(err, "Error: Couldn't read habit file")
 
@@ -135,7 +132,6 @@ func markHabit(homeDir string) {
 			// Increment streak
 			streak, err := strconv.Atoi(lines[1])
 			hdl(err, "Error: Invalid streak in habit file")
-
 			lines[1] = strconv.Itoa(streak + 1)
 
 			err = ioutil.WriteFile(habitPath, []byte(strings.Join(lines, "\n")), 0644)
