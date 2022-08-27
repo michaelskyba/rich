@@ -136,5 +136,12 @@ func markHabit(homeDir string) {
 	}
 }
 
-func printStreak(habitPath string) {
+func todoSingle(habitPath string) {
+	if isMarked(habitPath) {
+		fmt.Println("done")
+		os.Exit(1)
+	} else {
+		fmt.Println("todo")
+		os.Exit(0)
+	}
 }

@@ -23,8 +23,12 @@ func main() {
 	case (c == "list" && ln == 2) || ln == 1:
 		list(homeDir)
 
-	case c == "todo" && ln == 2:
-		todoAll(homeDir)
+	case c == "todo" && (ln == 2 || ln == 3):
+		if ln == 2 {
+			todoAll(homeDir)
+		} else {
+			todoSingle(habitPath)
+		}
 
 	case c == "new" && (ln == 3 || ln == 4):
 		createHabit(habitPath, ln)
