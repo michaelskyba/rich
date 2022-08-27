@@ -35,8 +35,7 @@ func updateStreak(filename string) {
 
 		// Reset streak
 		lines[1] = "0"
-		err = ioutil.WriteFile(filename, []byte(strings.Join(lines, "\n")), 0644)
-		hdl(err, "Error: Couldn't write to habit file")
+		writeLines(filename, lines)
 	}
 }
 

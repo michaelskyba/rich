@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"strings"
 )
 
 var userError = `Commands:
@@ -39,6 +41,11 @@ func getDigits(num int) int {
 	}
 
 	return digits
+}
+
+func writeLines(habitPath string, lines []string) {
+	err := ioutil.WriteFile(habitPath, []byte(strings.Join(lines, "\n")), 0644)
+	hdl(err, "Error: Couldn't write to habit file")
 }
 
 func getLine(filename string, i int) string {

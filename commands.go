@@ -97,8 +97,8 @@ func createHabit(habitPath string, argsLen int) {
 
 	timeString := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
 	content := []byte(fmt.Sprintf("%v\n%v\n", timeString, streak))
-	err = ioutil.WriteFile(habitPath, content, 0644)
 
+	err = ioutil.WriteFile(habitPath, content, 0644)
 	hdl(err, "Error: Couldn't create habit file")
 }
 
@@ -130,8 +130,7 @@ func markHabit(homeDir string) {
 			hdl(err, "Error: Invalid streak in habit file")
 			lines[1] = strconv.Itoa(streak + 1)
 
-			err = ioutil.WriteFile(habitPath, []byte(strings.Join(lines, "\n")), 0644)
-			hdl(err, "Error: Couldn't write to habit file")
+			writeLines(habitPath, lines)
 		}
 	}
 }
@@ -156,6 +155,5 @@ func setStreak(habitPath string, streak string) {
 
 	lines := strings.Split(string(habitFile), "\n")
 	lines[1] = streak
-	err = ioutil.WriteFile(habitPath, []byte(strings.Join(lines, "\n")), 0644)
-	hdl(err, "Error: Couldn't write to habit file")
+	writeLines(habitPath, lines)
 }
