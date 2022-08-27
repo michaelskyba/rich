@@ -43,6 +43,9 @@ func main() {
 	case c == "streak" && ln == 3:
 		fmt.Println(getStreak(habitPath))
 
+	case c == "set" && ln == 4:
+		setStreak(habitPath, os.Args[3])
+
 	default:
 		printError(userError)
 	}

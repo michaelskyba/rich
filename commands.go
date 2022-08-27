@@ -145,3 +145,17 @@ func todoSingle(habitPath string) {
 		os.Exit(0)
 	}
 }
+
+// Manually set the streak of an individual habit
+func setStreak(habitPath string, streak string) {
+	_, err := strconv.Atoi(streak)
+	hdl(err, "Error: Invalid streak provided")
+
+	habitFile, err := ioutil.ReadFile(habitPath)
+	hdl(err, "Error: Couldn't open habit file")
+
+	lines := strings.Split(string(habitFile), "\n")
+	lines[1] = streak
+	err = ioutil.WriteFile(habitPath, []byte(strings.Join(lines, "\n")), 0644)
+	hdl(err, "Error: Couldn't write to habit file")
+}
