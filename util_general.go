@@ -6,6 +6,14 @@ import (
 	"os"
 )
 
+var userError = `Commands:
+rich new <habit name> [streak]
+rich delete <habit name>
+rich mark <habit name> ...
+rich todo
+rich [list]
+See the README for more information.`
+
 func hdl(err error, message string) {
 	if err != nil {
 		printError(message)
@@ -15,16 +23,6 @@ func hdl(err error, message string) {
 func printError(message string) {
 	fmt.Fprintln(os.Stderr, message)
 	os.Exit(1)
-}
-
-func userError() {
-	printError(`Commands:
-rich new <habit name> [streak]
-rich delete <habit name>
-rich mark <habit name> ...
-rich todo
-rich [list]
-See the README for more information.`)
 }
 
 func getDigits(num int) int {
