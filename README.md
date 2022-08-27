@@ -2,8 +2,13 @@
 rich: a simple, streak-oriented, daily habit tracker written in Go
 
 ## Installation
-Clone the repo, run ``go build``, and then copy the resulting ``rich`` binary
-into your $PATH.
+```sh
+git clone https://github.com/michaelskyba/rich
+cd rich
+go build .
+su -c "cp rich /usr/local/bin/"
+mkdir -p ${RICH_HOME:-$HOME/.local/share/rich}
+```
 
 ## Overview
 rich stores each habit in a file, where the name of the file is the same name
@@ -13,8 +18,9 @@ that you gave the habit. The layout is as follows:
 <the current streak>
 ```
 These habit files will be stored in ``$RICH_HOME``, or ``$HOME/.local/share/rich``
-if ``$RICH_HOME`` is unset. **rich does not create these directories automatically**.
-``mkdir`` your directory manually before your first use.
+if ``$RICH_HOME`` is unset. **rich does not create these directories
+automatically**. ``mkdir`` your directory manually before your first use, as
+shown in the installation section.
 
 ## Commands
 - ``rich new <habit name> [streak]`` - create a new habit.
