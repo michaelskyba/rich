@@ -11,38 +11,38 @@ import (
 )
 
 // Reset streak if past due date
-func updateStreak(filename string) {
-	habitTime, err := time.Parse("2006-01-02 MST", getLine(filename, 0))
+func updateStreak(habitPath string) {
+	habitTime, err := time.Parse("2006-01-02 MST", getLine(habitPath, 0))
 	hdl(err, "Error: Invalid date in habit file")
 
 	// Has due date passed? (i.e. Is current time > habitTime + 2 days?)
 	currentTime := time.Now()
 	if currentTime.After(habitTime.AddDate(0, 0, 2)) {
-		habitFile, err := ioutil.ReadFile(filename)
+		habitFile, err := ioutil.ReadFile(habitPath)
 		hdl(err, "Error: Couldn't open habit file")
 
 		lines := strings.Split(string(habitFile), "\n")
 
-		// RICH_HOOK: filename last_completion old_streak cdate
+		// RICH_HOOK: filepath last_completion old_streak cdate
 		// Don't run it if the streak is already 0: that would be useless
 		hook := os.Getenv("RICH_HOOK")
 		if hook != "" && lines[1] != "0" {
 			habitTime := habitTime.Format("2006-01-02")
 			currentTime := currentTime.Format("2006-01-02")
 
-			exec.Command(hook, filename, habitTime, lines[1], currentTime).Output()
+			exec.Command(hook, habitPath, habitTime, lines[1], currentTime).Output()
 		}
 
 		// Reset streak
 		lines[1] = "0"
-		writeLines(filename, lines)
+		writeLines(habitPath, lines)
 	}
 }
 
 // Has a habit been marked as completed for today?
-func isMarked(filename string) bool {
+func isMarked(habitPath string) bool {
 	cdate := time.Now().Format("2006-01-02 MST")
-	habitDate := getLine(filename, 0)
+	habitDate := getLine(habitPath, 0)
 
 	return cdate == habitDate
 }

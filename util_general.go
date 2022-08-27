@@ -48,8 +48,8 @@ func writeLines(habitPath string, lines []string) {
 	hdl(err, "Error: Couldn't write to habit file")
 }
 
-func getLine(filename string, i int) string {
-	file, err := os.Open(filename)
+func getLine(habitPath string, i int) string {
+	file, err := os.Open(habitPath)
 	defer file.Close()
 
 	hdl(err, "Error: Couldn't read habit file")
