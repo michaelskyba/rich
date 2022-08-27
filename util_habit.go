@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -39,7 +40,7 @@ func updateStreak(filename string) {
 	}
 }
 
-// Has a habit been marked today?
+// Has a habit been marked as completed for today?
 func isMarked(filename string) bool {
 	cdate := time.Now().Format("2006-01-02 MST")
 	habitDate := getLine(filename, 0)
@@ -53,4 +54,10 @@ func getHomeDir() string {
 		return fmt.Sprintf("%v/.local/share/rich", os.Getenv("HOME"))
 	}
 	return os.Getenv("RICH_HOME")
+}
+
+func getStreak(habitPath string) int {
+	streak, err := strconv.Atoi(getLine(habitPath, 1))
+	hdl(err, "Error: Invalid streak in habit file")
+	return streak
 }

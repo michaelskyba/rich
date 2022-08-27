@@ -36,6 +36,9 @@ func main() {
 	case c == "mark" && ln > 2:
 		markHabit(homeDir)
 
+	case c == "streak" && ln == 3:
+		fmt.Println(getStreak(habitPath))
+
 	default:
 		printError(userError)
 	}

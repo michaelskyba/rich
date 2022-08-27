@@ -36,11 +36,7 @@ func list(homeDir string) {
 	var habits []Streak
 	for _, habitFilename := range habitFilenames {
 		habitPath := fmt.Sprintf("%v/%v", homeDir, habitFilename)
-
-		streak, err := strconv.Atoi(getLine(habitPath, 1))
-		hdl(err, "Error: Invalid streak in habit file")
-
-		habits = append(habits, Streak{habitFilename, streak})
+		habits = append(habits, Streak{habitFilename, getStreak(habitPath)})
 	}
 
 	// Sort habits based on streak lengths
@@ -138,4 +134,7 @@ func markHabit(homeDir string) {
 			hdl(err, "Error: Couldn't write to habit file")
 		}
 	}
+}
+
+func printStreak(habitPath string) {
 }
