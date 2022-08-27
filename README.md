@@ -23,20 +23,34 @@ automatically**. ``mkdir`` your directory manually before your first use, as
 shown in the installation section.
 
 ## Commands
-- ``rich new <habit name> [streak]`` - create a new habit.
-The streak will be set to "0" by default (no streak yet). The last date will be
-set to yesterday; the habit is not marked as complete for today. If your
-streak includes today, submit (streak - 1), and then run ``rich mark <habit name>``.
-- ``rich delete <habit name>`` - delete a habit. There is no confirmation prompt.
-- ``rich mark <habit name> ...`` - mark one more habits as complete for today.
-- ``rich set <habit name> <streak>`` - manually set the streak of a habit.
-- ``rich streak <habit name>`` - print the streak length of a habit.
-- ``rich todo [habit name]`` - by default, list habits that have yet to be
-completed today. If you provide a habit as an additional argument, instead of
-listing anything, it will output "todo" (with exit code 0) or "done" (with exit
-code 1) depending on whether the habit has been marked today.
-- ``rich [list]`` - list all existing habits with padded spacing, sorted by
-streak length.
+### ``rich new <habit name> [streak]``
+Create a new habit. The streak will be set to "0" by default (no streak yet).
+The last date will be set to yesterday; the habit is not marked as complete for
+today. If your streak includes today, submit (streak - 1), and then run ``rich
+mark <habit name>``. 
+
+### ``rich delete <habit name>``
+Delete a habit. There is no confirmation prompt.
+
+### ``rich mark <habit name> ...``
+Mark one more habits as complete for today.
+
+### ``rich set <habit name> <streak>``
+Manually set the streak of a habit.
+
+### ``rich streak <habit name>``
+Print the streak length of a habit.
+
+### ``rich todo [habit name]``
+If no habit name is provided, print a list of habits that have yet to be
+completed today.
+
+If a habit is provided as an additional argument, instead of listing anything,
+output "todo" (with exit code 0) or "done" (with exit code 1) depending on
+whether the habit has been marked today.
+
+### ``rich [list]``
+List all existing habits with padded spacing, sorted by streak length.
 
 ## $RICH_HOOK
 When a day passes for which a habit is not marked as completed, the habit
