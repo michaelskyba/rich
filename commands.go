@@ -29,7 +29,7 @@ func list(homeDir string) {
 	// Reset lost streaks
 	for _, habitFilename := range habitFilenames {
 		habitPath := fmt.Sprintf("%v/%v", homeDir, habitFilename)
-		updateStreak(habitPath)
+		checkMissed(habitPath)
 	}
 
 	// Get habit streaks
@@ -115,7 +115,7 @@ func markHabit(homeDir string) {
 			fmt.Printf("'%v' has already been completed today.\n", habit)
 
 		} else {
-			updateStreak(habitPath)
+			checkMissed(habitPath)
 
 			habitFile, err := ioutil.ReadFile(habitPath)
 			hdl(err, "Error: Couldn't read habit file")

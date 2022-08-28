@@ -10,28 +10,34 @@ import (
 	"time"
 )
 
-// Reset streak if past due date
-func updateStreak(habitPath string) {
+// Check if a habit has been missed and execute a hook (or reset) accordingly
+func checkMissed(habitPath string) {
 	habitTime, err := time.Parse("2006-01-02 MST", getLine(habitPath, 0))
 	hdl(err, "Error: Invalid date in habit file")
 
 	// Has due date passed? (i.e. Is current time > habitTime + 2 days?)
 	currentTime := time.Now()
-	if currentTime.After(habitTime.AddDate(0, 0, 2)) {
-		habitFile, err := ioutil.ReadFile(habitPath)
-		hdl(err, "Error: Couldn't open habit file")
+	if currentTime.Before(habitTime.AddDate(0, 0, 2)) {
+		return
+	}
 
-		lines := strings.Split(string(habitFile), "\n")
+	hook := os.Getenv("RICH_HOOK")
+	if hook != "" {
+		habitTime := habitTime.Format("2006-01-02")
+		currentTime := currentTime.Format("2006-01-02")
 
 		// RICH_HOOK: filepath last_completion old_streak cdate
-		// Don't run it if the streak is already 0: that would be useless
-		hook := os.Getenv("RICH_HOOK")
-		if hook != "" && lines[1] != "0" {
-			habitTime := habitTime.Format("2006-01-02")
-			currentTime := currentTime.Format("2006-01-02")
+		exec.Command(hook, habitPath, habitTime, lines[1], currentTime).Output()
 
-			exec.Command(hook, habitPath, habitTime, lines[1], currentTime).Output()
+	} else {
+		// Don't run reset if the streak is already 0: that would be useless
+		if lines[1] != "0" {
+			return
 		}
+
+		habitFile, err := ioutil.ReadFile(habitPath)
+		hdl(err, "Error: Couldn't open habit file")
+		lines := strings.Split(string(habitFile), "\n")
 
 		// Reset streak
 		lines[1] = "0"
