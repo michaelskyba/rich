@@ -35,7 +35,7 @@ func checkMissed(habitPath string) {
 
 	} else {
 		// Don't run reset if the streak is already 0: that would be useless
-		if lines[1] != "0" {
+		if lines[1] == "0" {
 			return
 		}
 
