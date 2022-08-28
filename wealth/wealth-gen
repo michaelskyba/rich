@@ -13,18 +13,14 @@ case "$1" in
 
 	toggle)
 		order=$(wealth-gen order)
-		todo=$(mktemp -u)
 		toggle=$(mktemp -u)
-		rich todo > "$todo"
 
 		while read -r habit
 		do
-			is_todo=
-			grep -q "^$habit\$" "$todo" && is_todo=1
-			[ "$is_todo" ] && status="[ ]"
-			[ "$is_todo" ] || status="[X]"
-
-			count=$(tail -1 "$rich_dir/$habit")
+			rich todo "$habit" > /dev/null &&
+				status="[ ]" ||
+				status="[X]"
+			count=$(rich streak "$habit")
 
 			echo "$status [$count]	$habit" >> "$toggle"
 		done < "$order"

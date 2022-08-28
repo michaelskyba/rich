@@ -46,19 +46,17 @@ Previous count : $count
 		exit
 
 	# Skip
-	[ -z "$sel" ] && continue
+	[ "$sel" ] || continue
 
 	# Reset
 	[ "$sel" = r ] &&
-		rich delete "$name" &&
-		rich new "$name" &&
+		rich set "$name" 0 &&
 		remove_forgot &&
 		continue
 
 	# Number: valid
 	echo "$sel" | grep -q "^-\?[0-9]\+$" &&
-		rich delete "$name" &&
-		rich new "$name" "$((count+sel))" &&
+		rich set "$name" "$((count+sel))" &&
 		remove_forgot &&
 		continue
 

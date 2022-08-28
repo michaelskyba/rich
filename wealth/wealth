@@ -1,6 +1,4 @@
 #!/bin/sh -e
-# https://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail
-
 . wealth-src
 
 menu="Welcome to wealth.

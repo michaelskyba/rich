@@ -14,7 +14,7 @@ done < "$order"
 parsed_todo=$(mktemp -u)
 while read -r habit
 do
-	count=$(tail -1 "$rich_dir/$habit")
+	count=$(rich streak "$habit")
 	echo "[$count]	$habit" >> "$parsed_todo"
 done < "$ordered_todo"
 
@@ -40,7 +40,6 @@ do
 	[ "$sel" ] || break
 	sel=${sel##*	}
 
-	echo "$sel"
 	rich mark "$sel"
 	sed -i "/\t$sel$/d" "$parsed_todo"
 done

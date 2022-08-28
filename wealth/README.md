@@ -43,10 +43,7 @@ As you can see, comments are lines that start with ``#``. ``x # y`` is not a
 valid comment.
 
 ## Status
-~~wealth is mostly in a usable state but I haven't done much testing yet,
-especially for abstract edge cases.~~
-2022-08-28: wealth is currently completely unusable. Ignore everything else in
-this README until I have made it compatible with the new rich design.
+I'm pretty sure that it should mostly work, but I have done zero testing.
 
 ## Dependencies
 - rich
@@ -61,5 +58,6 @@ this README until I have made it compatible with the new rich design.
 
 ## TODO
 - Add error message on forgotten habits screen if there are none
-- Improve the UI consistency (e.g. right now there is an echo "no habits" screen
-and a fzf "no habits" screen, which makes no sense)
+- Handle running out of habits to mark properly in wealth-mark
+- Improve UI consistency (e.g. right now there is an echo "no habits" screen and
+a fzf "no habits" screen, which makes no sense)

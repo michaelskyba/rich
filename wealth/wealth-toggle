@@ -26,6 +26,5 @@ do
 		count=${sel##* } &&
 		count=${count%%	*} &&
 		count=$(echo "$count" | sed "s/[][]//g") &&
-		rich delete "$habit" &&
-		rich new "$habit" "$((count-1))"
+		rich set "$habit" "$((count-1))"
 done

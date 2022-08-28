@@ -31,7 +31,8 @@ do
 		echo &&
 		echo "A habit called '$name' already exists." &&
 		echo "Press Enter to pick a new name." &&
-		read pause
+		read pause &&
+		continue
 
 	init_streak=$(echo "$init_streak_message" | fzf $fzf --header-lines=2 --print-query)
 

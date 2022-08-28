@@ -1,5 +1,4 @@
 #!/bin/sh
-
 name=${1##*/}
 date=$2
 number=$3
@@ -12,3 +11,6 @@ id=$(md5sum "$tmp")
 id=${id%% *}
 
 echo "$id,$name,$date,$number" >> $XDG_CONFIG_HOME/wealth/forgot
+
+# (The habit streak is never modified here. The user sets it through
+# the wealth-forgot UI)
