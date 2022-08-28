@@ -66,3 +66,12 @@ func getStreak(habitPath string) int {
 	hdl(err, "Error: Invalid streak in habit file")
 	return streak
 }
+
+func setStreak(habitPath string, streak int) error {
+	// We need to set yesterday as the initial date. Otherwise, if you set a
+	// streak, rich mark will reset it, thinking that the streak was in the past.
+
+	timeString := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
+	content := []byte(fmt.Sprintf("%v\n%v\n", timeString, streak))
+	err := ioutil.WriteFile(habitPath, content, 0644)
+}

@@ -44,7 +44,7 @@ func main() {
 		fmt.Println(getStreak(habitPath))
 
 	case c == "set" && ln == 4:
-		setStreak(habitPath, os.Args[3])
+		setStreakCommand(habitPath, os.Args[3])
 
 	default:
 		printError(userError)

@@ -92,13 +92,7 @@ func createHabit(habitPath string, argsLen int) {
 		}
 	}
 
-	// We need to set yesterday as the initial date. Otherwise, if you set a
-	// streak, rich mark will reset it, thinking that the streak was in the past.
-
-	timeString := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
-	content := []byte(fmt.Sprintf("%v\n%v\n", timeString, streak))
-
-	err = ioutil.WriteFile(habitPath, content, 0644)
+	err = setStreak(habitPath, streak)
 	hdl(err, "Error: Couldn't create habit file")
 }
 
@@ -146,14 +140,10 @@ func todoSingle(habitPath string) {
 }
 
 // Manually set the streak of an individual habit
-func setStreak(habitPath string, streak string) {
+func setStreakCommand(habitPath string, streak string) {
 	_, err := strconv.Atoi(streak)
 	hdl(err, "Error: Invalid streak provided")
 
-	habitFile, err := ioutil.ReadFile(habitPath)
-	hdl(err, "Error: Couldn't open habit file")
-
-	lines := strings.Split(string(habitFile), "\n")
-	lines[1] = streak
-	writeLines(habitPath, lines)
+	err = setStreak(habitPath, streak)
+	hdl(err, "Error: Couldn't write to habit file")
 }
