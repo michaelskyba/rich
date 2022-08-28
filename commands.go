@@ -82,14 +82,11 @@ func createHabit(habitPath string, argsLen int) {
 	var err error
 
 	// Default streak
-	streak := 0
+	streak := "0"
 	if argsLen == 4 {
-		streak, err = strconv.Atoi(os.Args[3])
+		streak = os.Args[3]
+		_, err = strconv.Atoi(streak)
 		hdl(err, "Error: Invalid streak")
-
-		if streak < 0 {
-			printError("Error: Invalid streak")
-		}
 	}
 
 	err = setStreak(habitPath, streak)

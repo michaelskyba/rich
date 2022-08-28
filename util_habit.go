@@ -21,6 +21,10 @@ func checkMissed(habitPath string) {
 		return
 	}
 
+	habitFile, err := ioutil.ReadFile(habitPath)
+	hdl(err, "Error: Couldn't open habit file")
+	lines := strings.Split(string(habitFile), "\n")
+
 	hook := os.Getenv("RICH_HOOK")
 	if hook != "" {
 		habitTime := habitTime.Format("2006-01-02")
@@ -34,10 +38,6 @@ func checkMissed(habitPath string) {
 		if lines[1] != "0" {
 			return
 		}
-
-		habitFile, err := ioutil.ReadFile(habitPath)
-		hdl(err, "Error: Couldn't open habit file")
-		lines := strings.Split(string(habitFile), "\n")
 
 		// Reset streak
 		lines[1] = "0"
@@ -67,11 +67,12 @@ func getStreak(habitPath string) int {
 	return streak
 }
 
-func setStreak(habitPath string, streak int) error {
+func setStreak(habitPath string, streak string) error {
 	// We need to set yesterday as the initial date. Otherwise, if you set a
 	// streak, rich mark will reset it, thinking that the streak was in the past.
 
 	timeString := time.Now().AddDate(0, 0, -1).Format("2006-01-02 MST")
 	content := []byte(fmt.Sprintf("%v\n%v\n", timeString, streak))
 	err := ioutil.WriteFile(habitPath, content, 0644)
+	return err
 }
