@@ -26,7 +26,7 @@ do
 	[ "$name" ] || break
 
 	exists=
-	[ -f "$XDG_CONFIG_HOME/rich/$name" ] && exists=1
+	[ -f "$rich_dir/$name" ] && exists=1
 	[ "$exists" ] &&
 		echo &&
 		echo "A habit called '$name' already exists." &&

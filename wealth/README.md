@@ -15,7 +15,7 @@ su -c "cp wealth wealth-* /usr/local/bin/"
 
 # Initial configuration setup
 mkdir -p $XDG_CONFIG_HOME/wealth
-ls $XDG_CONFIG_HOME/rich > $XDG_CONFIG_HOME/wealth/order
+ls ${RICH_HOME:-$HOME/.local/share/rich} > $XDG_CONFIG_HOME/wealth/order
 ```
 
 ## Order file syntax
@@ -24,7 +24,7 @@ blank, a comment, or the filename of a habit. Here is a valid example.
 
 The habits:
 ```sh
-$ ls $XDG_CONFIG_HOME/rich
+$ ls ${RICH_HOME:-$HOME/.local/share/rich}
 2500ml_water
 30m_treadmill
 no_homicide

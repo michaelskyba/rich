@@ -14,7 +14,7 @@ done < "$order"
 parsed_todo=$(mktemp -u)
 while read -r habit
 do
-	count=$(tail -1 "$XDG_CONFIG_HOME/rich/$habit")
+	count=$(tail -1 "$rich_dir/$habit")
 	echo "[$count]	$habit" >> "$parsed_todo"
 done < "$ordered_todo"
 

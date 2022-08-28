@@ -4,7 +4,7 @@
 case "$1" in
 	order)
 		habits=$(mktemp -u)
-		ls "$XDG_CONFIG_HOME/rich" > "$habits"
+		ls "$rich_dir" > "$habits"
 		order=$XDG_CONFIG_HOME/wealth/order
 
 		output=$(mktemp -u)
@@ -24,7 +24,7 @@ case "$1" in
 			[ "$is_todo" ] && status="[ ]"
 			[ "$is_todo" ] || status="[X]"
 
-			count=$(tail -1 "$XDG_CONFIG_HOME/rich/$habit")
+			count=$(tail -1 "$rich_dir/$habit")
 
 			echo "$status [$count]	$habit" >> "$toggle"
 		done < "$order"
