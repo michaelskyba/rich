@@ -43,8 +43,10 @@ As you can see, comments are lines that start with ``#``. ``x # y`` is not a
 valid comment.
 
 ## Status
-wealth is mostly in a usable state but I haven't done much testing yet,
-especially for abstract edge cases.
+~~wealth is mostly in a usable state but I haven't done much testing yet,
+especially for abstract edge cases.~~
+2022-08-28: wealth is currently completely unusable. Ignore everything else in
+this README until I have made it compatible with the new rich design.
 
 ## Dependencies
 - rich
