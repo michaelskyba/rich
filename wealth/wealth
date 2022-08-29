@@ -12,7 +12,8 @@ What would you like to do?
 6. Toggle habit completion.
 7. Manually set a habit's streak count.
 8. Rename a habit.
-9. Exit the program."
+9. Delete a habit.
+10. Exit the program."
 
 while :
 do
@@ -30,6 +31,7 @@ do
 		6) wealth-toggle ;;
 		7) wealth-set ;;
 		8) wealth-rename ;;
-		9) exit ;;
+		9) wealth-delete ;;
+		10) exit ;;
 	esac
 done
