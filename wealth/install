@@ -1,0 +1,8 @@
+#!/bin/sh -e
+go build ./wealt-order.go
+su -c "cp wealth wealth-* /usr/local/bin/"
+
+wealth=$XDG_CONFIG_HOME/wealth
+mkdir -p $wealth
+ls ${RICH_HOME:-$HOME/.local/share/rich} > $wealth
+touch $wealth/forgot

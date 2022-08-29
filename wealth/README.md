@@ -9,13 +9,7 @@ the same as ``shovel``'s to ``tunnel``.
 ```sh
 cd /path/to/rich
 cd wealth
-
-go build wealth-order.go
-su -c "cp wealth wealth-* /usr/local/bin/"
-
-# Initial configuration setup
-mkdir -p $XDG_CONFIG_HOME/wealth
-ls ${RICH_HOME:-$HOME/.local/share/rich} > $XDG_CONFIG_HOME/wealth/order
+./install
 ```
 
 ## Order file syntax
