@@ -55,8 +55,3 @@ I'm pretty sure that it should mostly work, but I have done zero testing.
 ![screenshot](https://raw.githubusercontent.com/michaelskyba/rich/master/wealth/assets/screenshot.webp)
 
 (Of the "Toggle habit completion." screen)
-
-## TODO
-- Handle running out of habits to mark properly in wealth-mark
-- Improve UI consistency (e.g. right now there is an echo "no habits" screen and
-a fzf "no habits" screen, which makes no sense)
