@@ -17,7 +17,7 @@ What would you like to do?
 
 while :
 do
-	sel=$(echo "$menu" | fzf $fzf --header-lines=3)
+	sel=$(echo "$menu" | $fzf --header-lines=3)
 
 	# Cancel
 	[ "$sel" ] || exit

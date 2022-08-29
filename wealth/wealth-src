@@ -1,6 +1,6 @@
 #!/bin/sh
 rich_dir=${RICH_HOME:-$HOME/.local/share/rich}
-fzf="--reverse --bind=tab:down,btab:up,alt-k:up,alt-j:down --cycle"
+fzf="fzf --info=hidden --header-first --margin=1,0,0,0 --reverse --bind=tab:down,btab:up,alt-k:up,alt-j:down --cycle"
 no_habits="You have not created any habits.
 Use the 'Create a new habit.' menu option to create one."
 

@@ -22,7 +22,7 @@ success() {
 while :
 do
 	clear
-	name=$(echo "$name_message" | fzf $fzf --header-lines=2 --print-query)
+	name=$(echo "$name_message" | $fzf --header-lines=2 --print-query)
 	[ "$name" ] || break
 
 	exists=
@@ -34,7 +34,7 @@ do
 		read pause &&
 		continue
 
-	init_streak=$(echo "$init_streak_message" | fzf $fzf --header-lines=2 --print-query)
+	init_streak=$(echo "$init_streak_message" | $fzf --header-lines=2 --print-query)
 
 	[ "$exists" ] || success
 done

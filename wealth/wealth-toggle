@@ -17,7 +17,7 @@ $toggle"
 
 while :
 do
-	sel=$(gen_menu | fzf $fzf --header-lines=6)
+	sel=$(gen_menu | $fzf --header-lines=6)
 	[ "$sel" ] || break
 
 	habit=${sel##*	}

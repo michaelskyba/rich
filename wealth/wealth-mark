@@ -40,7 +40,7 @@ do
 	# dysfunctional, confusing prompt
 	[ "$(cat "$parsed_todo")" ] || break
 
-	sel=$(gen_header | fzf $fzf --header-lines=4)
+	sel=$(gen_header | $fzf --header-lines=4)
 	[ "$sel" ] || break
 	sel=${sel##*	}
 
