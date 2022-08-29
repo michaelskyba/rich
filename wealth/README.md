@@ -57,7 +57,6 @@ I'm pretty sure that it should mostly work, but I have done zero testing.
 (Of the "Toggle habit completion." screen)
 
 ## TODO
-- Add error message on forgotten habits screen if there are none
 - Handle running out of habits to mark properly in wealth-mark
 - Improve UI consistency (e.g. right now there is an echo "no habits" screen and
 a fzf "no habits" screen, which makes no sense)
