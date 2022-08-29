@@ -36,6 +36,10 @@ $(cat $parsed_todo)"
 
 while :
 do
+	# Exit once there are no habits to complete instead of making a
+	# dysfunctional, confusing prompt
+	[ "$(cat "$parsed_todo")" ] || break
+
 	sel=$(gen_header | fzf $fzf --header-lines=4)
 	[ "$sel" ] || break
 	sel=${sel##*	}
