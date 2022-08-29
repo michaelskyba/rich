@@ -2,6 +2,13 @@
 name=${1##*/}
 date=$2
 number=$3
+forgot=$XDG_CONFIG_HOME/wealth/forgot
+
+# Don't record multiple misses for the same habit.
+# However, because of (sigh) race conditions, it's still possible to get
+# duplicates, which is why I remove duplicates later, rendering this a slight
+# performance boost
+grep -q "^[^,]\+$name," "$forgot" && exit
 
 # Generate unique identifier
 # ($RANDOM and $(date +%s) wouldn't change fast enough)
@@ -10,7 +17,13 @@ echo "$RANDOM $name" > "$tmp"
 id=$(md5sum "$tmp")
 id=${id%% *}
 
-echo "$id,$name,$date,$number" >> $XDG_CONFIG_HOME/wealth/forgot
+echo "$id,$name,$date,$number" >> $forgot
+
+# Remove duplicates.
+# Hopefully this runs fast enough that I don't have to worry about race
+# conditions again... Either way, this is the shell's fault, right?
+awk '!seen[$0]++' "$forgot" > "$tmp"
+mv "$tmp" "$forgot"
 
 # (The habit streak is never modified here. The user sets it through
 # the wealth-forgot UI)

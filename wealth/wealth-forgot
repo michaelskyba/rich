@@ -20,7 +20,7 @@ do
 	grep ",$habit," "$config/forgot" >> "$ordered_forgot"
 done < "$(wealth-gen order)"
 
-[ ! $(cat "$ordered_forgot") ] &&
+[ ! "$(cat "$ordered_forgot")" ] &&
 	echo "$no_forgotten" &&
 	read pause &&
 	exit
