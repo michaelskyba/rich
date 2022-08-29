@@ -11,7 +11,8 @@ What would you like to do?
 5. Mark habits that are uncompleted today.
 6. Toggle habit completion.
 7. Manually set a habit's streak count.
-8. Exit the program."
+8. Rename a habit.
+9. Exit the program."
 
 while :
 do
@@ -28,6 +29,7 @@ do
 		5) wealth-mark ;;
 		6) wealth-toggle ;;
 		7) wealth-set ;;
-		8) exit ;;
+		8) wealth-rename ;;
+		9) exit ;;
 	esac
 done

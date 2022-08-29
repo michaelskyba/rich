@@ -1,7 +1,7 @@
 #!/bin/sh
 . wealth-src
 
-# clear
+clear
 file=$(wealth-gen toggle)
 [ -f "$file" ] && toggle=$(cat "$file")
 
