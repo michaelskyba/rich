@@ -4,10 +4,7 @@
 clear
 file=$(wealth-gen order)
 [ -f "$file" ] && order=$(cat "$file")
-
-[ -z "$order" ] &&
-	echo "$no_habits" &&
-	exit
+[ "$order" ] || no_habits
 
 prompt="Select a habit to delete.
 Press Escape to cancel.
@@ -29,5 +26,4 @@ sed -i "/^$habit$/d" order
 sed -i "/,$habit,/d" forgot
 
 echo "Successfully deleted '$habit'.
-Press Enter to return to the main menu."
-read pause
+Press Enter to return to the main menu." | $fzf --header-lines=2

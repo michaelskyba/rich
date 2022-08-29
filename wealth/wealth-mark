@@ -18,12 +18,13 @@ do
 	echo "[$count]	$habit" >> "$parsed_todo"
 done < "$ordered_todo"
 
-[ ! -f "$parsed_todo" ] &&
-	clear &&
-	echo "You do not have any habits to complete." &&
-	echo "Press Enter to return to the main menu." &&
-	read pause &&
+if [ ! -f "$parsed_todo" ]
+then
+	clear
+	echo "You do not have any habits to complete.
+Press Enter to return to the main menu." | $fzf --header-lines=2
 	exit
+fi
 
 gen_header() {
 	echo "These habits have not been completed today.

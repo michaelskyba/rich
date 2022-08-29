@@ -4,10 +4,7 @@
 clear
 file=$(wealth-gen toggle)
 [ -f "$file" ] && toggle=$(cat "$file")
-
-[ -z "$toggle" ] &&
-	echo "$no_habits" &&
-	exit
+[ "$toggle" ] || no_habits
 
 prompt="Select a habit to modify.
 Press Escape to cancel.
@@ -27,5 +24,4 @@ streak=$(echo "$prompt" | $fzf --header-lines=3 --print-query)
 rich set "$habit" "$streak" || exit 1
 
 echo "Successfully set $habit's streak to $streak.
-Press Enter to return to the main menu."
-read pause
+Press Enter to return to the main menu." | $fzf --header-lines=2

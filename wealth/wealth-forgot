@@ -20,10 +20,11 @@ do
 	grep ",$habit," "$config/forgot" >> "$ordered_forgot"
 done < "$(wealth-gen order)"
 
-[ ! "$(cat "$ordered_forgot")" ] &&
-	echo "$no_forgotten" &&
-	read pause &&
+if [ ! "$(cat "$ordered_forgot")" ]
+then
+	echo "$no_forgotten" | $fzf --header-lines=2
 	exit
+fi
 
 new_forgot=$(mktemp -u)
 cp "$config/forgot" "$new_forgot"

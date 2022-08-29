@@ -1,8 +1,14 @@
 #!/bin/sh
 rich_dir=${RICH_HOME:-$HOME/.local/share/rich}
 fzf="fzf --info=hidden --header-first --margin=1,0,0,0 --reverse --bind=tab:down,btab:up,alt-k:up,alt-j:down --cycle"
-no_habits="You have not created any habits.
-Use the 'Create a new habit.' menu option to create one."
+
+no_habits_msg="You have not created any habits.
+Use the 'Create a new habit.' menu option to create one.
+Press Enter to return to the main menu."
+no_habits() {
+	echo "$no_habits_msg" | $fzf --header-lines=3
+	exit
+}
 
 # Update any dates/forgets
 RICH_HOOK=wealth-hook rich list > /dev/null

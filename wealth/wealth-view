@@ -4,11 +4,15 @@
 clear
 file=$(wealth-gen toggle)
 [ -f "$file" ] && toggle=$(cat "$file")
+[ "$toggle" ] || no_habits
 
-[ "$toggle" ] || echo "$no_habits"
-[ "$toggle" ] &&
-	echo "Your habits:
-$toggle"
+tmp=$(mktemp -u)
+echo "Your habits:
+$toggle
 
-echo "Press Enter to return to the main menu."
-read pause
+Press Enter to return to the main menu." > "$tmp"
+
+wc=$(wc -l "$tmp")
+wc=${wc%% *}
+
+$fzf --header-lines=$wc < "$tmp"

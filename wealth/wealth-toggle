@@ -4,9 +4,9 @@
 gen_menu() {
 	file=$(wealth-gen toggle)
 	[ -f "$file" ] && toggle=$(cat "$file")
+	[ "$toggle" ] || no_habits
 
-	[ "$toggle" ] || echo "$no_habits"
-	[ "$toggle" ] && echo "[X]: Completed today
+	echo "[X]: Completed today
 [ ]: Not completed today
 
 Select a habit to toggle completion.

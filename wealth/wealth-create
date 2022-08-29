@@ -13,9 +13,8 @@ success() {
 	rich new "$name" $init_streak || exit 1
 	echo "$name" >> "$XDG_CONFIG_HOME/wealth/order"
 
-	echo "Successfully created the '$name' habit."
-	echo "Press Enter to return to the main menu."
-	read pause
+	echo "Successfully created the '$name' habit.
+Press Enter to return to the main menu." | $fzf --header-lines=2
 	exit
 }
 
@@ -27,12 +26,13 @@ do
 
 	exists=
 	[ -f "$rich_dir/$name" ] && exists=1
-	[ "$exists" ] &&
-		echo &&
-		echo "A habit called '$name' already exists." &&
-		echo "Press Enter to pick a new name." &&
-		read pause &&
+
+	if [ "$exists" ]
+	then
+		echo "A habit called '$name' already exists.
+Press Enter to pick a new name." | $fzf --header-lines=2
 		continue
+	fi
 
 	init_streak=$(echo "$init_streak_message" | $fzf --header-lines=2 --print-query)
 
