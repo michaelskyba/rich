@@ -23,7 +23,7 @@ done < "$(wealth-gen order)"
 if [ ! "$(cat "$ordered_forgot")" ]
 then
 	echo "$no_forgotten" | $fzf --header-lines=2
-	exit
+	exit 0
 fi
 
 new_forgot=$(mktemp -u)
@@ -52,7 +52,7 @@ Previous count : $count
 	# Escape: cancel
 	[ "$sel" = exit ] &&
 		update_forgot &&
-		exit
+		exit 0
 
 	# Skip
 	[ "$sel" ] || continue

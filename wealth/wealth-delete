@@ -11,14 +11,14 @@ Press Escape to cancel.
 $order"
 
 sel=$(echo "$prompt" | $fzf --header-lines=2)
-[ "$sel" ] || exit
+[ "$sel" ] || exit 0
 
 habit=${sel##*	}
 prompt="Are you sure you want to delete '$habit'?
 Type 'yes' to confirm the deletion. Press Escape to cancel."
 
 name=$(echo "$prompt" | $fzf --header-lines=2 --print-query)
-[ "$name" = yes ] || exit
+[ "$name" = yes ] || exit 0
 
 rich delete "$habit"
 cd "$XDG_CONFIG_HOME/wealth"

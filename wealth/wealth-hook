@@ -8,7 +8,7 @@ forgot=$XDG_CONFIG_HOME/wealth/forgot
 # However, because of (sigh) race conditions, it's still possible to get
 # duplicates, which is why I remove duplicates later, rendering this a slight
 # performance boost
-grep -q "^[^,]\+$name," "$forgot" && exit
+grep -q "^[^,]\+$name," "$forgot" && exit 0
 
 # Generate unique identifier
 # ($RANDOM and $(date +%s) wouldn't change fast enough)

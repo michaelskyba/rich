@@ -1,5 +1,9 @@
-#!/bin/sh -e
+#!/bin/sh
 . wealth-src
+
+run() {
+	wealth-$1 || exit 1
+}
 
 menu="Welcome to wealth.
 What would you like to do?
@@ -20,18 +24,18 @@ do
 	sel=$(echo "$menu" | $fzf --header-lines=3)
 
 	# Cancel
-	[ "$sel" ] || exit
+	[ "$sel" ] || exit 0
 
 	case "${sel%%. *}" in
-		1) wealth-view ;;
-		2) wealth-create ;;
+		1) run view ;;
+		2) run create ;;
 		3) $EDITOR $XDG_CONFIG_HOME/wealth/order ;;
-		4) wealth-forgot ;;
-		5) wealth-mark ;;
-		6) wealth-toggle ;;
-		7) wealth-set ;;
-		8) wealth-rename ;;
-		9) wealth-delete ;;
-		10) exit ;;
+		4) run forgot ;;
+		5) run mark ;;
+		6) run toggle ;;
+		7) run set ;;
+		8) run rename ;;
+		9) run delete ;;
+		10) exit 0 ;;
 	esac
 done

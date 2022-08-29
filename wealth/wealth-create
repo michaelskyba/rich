@@ -15,7 +15,7 @@ success() {
 
 	echo "Successfully created the '$name' habit.
 Press Enter to return to the main menu." | $fzf --header-lines=2
-	exit
+	exit 0
 }
 
 while :

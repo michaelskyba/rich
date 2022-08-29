@@ -23,7 +23,7 @@ then
 	clear
 	echo "You do not have any habits to complete.
 Press Enter to return to the main menu." | $fzf --header-lines=2
-	exit
+	exit 0
 fi
 
 gen_header() {

@@ -11,7 +11,7 @@ Press Escape to cancel.
 $toggle"
 
 sel=$(echo "$prompt" | $fzf --header-lines=2)
-[ "$sel" ] || exit
+[ "$sel" ] || exit 0
 
 habit=${sel##*	}
 prompt="What streak number do you want to set
@@ -19,7 +19,7 @@ $habit (${sel%	*})
 to? Press Escape to cancel."
 
 streak=$(echo "$prompt" | $fzf --header-lines=3 --print-query)
-[ "$streak" ] || exit
+[ "$streak" ] || exit 0
 
 rich set "$habit" "$streak" || exit 1
 
