@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 . wealth-src
 
 clear
@@ -16,3 +16,4 @@ wc=$(wc -l "$tmp")
 wc=${wc%% *}
 
 $fzf --header-lines=$wc < "$tmp"
+exit 0

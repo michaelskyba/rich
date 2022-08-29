@@ -39,10 +39,10 @@ while :
 do
 	# Exit once there are no habits to complete instead of making a
 	# dysfunctional, confusing prompt
-	[ "$(cat "$parsed_todo")" ] || break
+	[ "$(cat "$parsed_todo")" ] || exit 0
 
 	sel=$(gen_header | $fzf --header-lines=4)
-	[ "$sel" ] || break
+	[ "$sel" ] || exit 0
 	sel=${sel##*	}
 
 	rich mark "$sel"

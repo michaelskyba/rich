@@ -18,7 +18,7 @@ $toggle"
 while :
 do
 	sel=$(gen_menu | $fzf --header-lines=6)
-	[ "$sel" ] || break
+	[ "$sel" ] || exit 0
 
 	habit=${sel##*	}
 	[ "${sel%% *}" = "[" ] && rich mark "$habit"

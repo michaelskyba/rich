@@ -33,3 +33,4 @@ sed -i "s/,$original,/,$name,/g" forgot
 
 echo "Successfully renamed $original --> $name.
 Press Enter to return to the main menu." | $fzf --header-lines=2
+exit 0

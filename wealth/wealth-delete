@@ -27,3 +27,4 @@ sed -i "/,$habit,/d" forgot
 
 echo "Successfully deleted '$habit'.
 Press Enter to return to the main menu." | $fzf --header-lines=2
+exit 0

@@ -25,3 +25,4 @@ rich set "$habit" "$streak" || exit 1
 
 echo "Successfully set $habit's streak to $streak.
 Press Enter to return to the main menu." | $fzf --header-lines=2
+exit 0

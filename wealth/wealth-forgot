@@ -76,3 +76,4 @@ Previous count : $count
 done < "$ordered_forgot"
 
 update_forgot
+exit 0
