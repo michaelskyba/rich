@@ -10,11 +10,11 @@ What would you like to do?
 4. Handle forgotten habits.
 5. Mark habits that are uncompleted today.
 6. Toggle habit completion.
-7. Exit the program."
+7. Manually set a habit's streak count.
+8. Exit the program."
 
 while :
 do
-	default=5
 	sel=$(echo "$menu" | fzf $fzf --header-lines=3)
 
 	# Cancel
@@ -27,6 +27,7 @@ do
 		4) wealth-forgot ;;
 		5) wealth-mark ;;
 		6) wealth-toggle ;;
-		7) exit ;;
+		7) wealth-set ;;
+		8) exit ;;
 	esac
 done

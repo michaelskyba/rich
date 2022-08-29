@@ -1,0 +1,31 @@
+#!/bin/sh
+. wealth-src
+
+# clear
+file=$(wealth-gen toggle)
+[ -f "$file" ] && toggle=$(cat "$file")
+
+[ -z "$toggle" ] &&
+	echo "$no_habits" &&
+	exit
+
+prompt="Select a habit to modify.
+Press Escape to cancel.
+$toggle"
+
+sel=$(echo "$prompt" | fzf $fzf --header-lines=2)
+[ "$sel" ] || exit
+
+habit=${sel##*	}
+prompt="What streak number do you want to set
+$habit (${sel%	*})
+to? Press Escape to cancel."
+
+streak=$(echo "$prompt" | fzf $fzf --header-lines=3 --print-query)
+[ "$streak" ] || exit
+
+rich set "$habit" "$streak" || exit 1
+
+echo "Successfully set $habit's streak to $streak.
+Press Enter to return to the main menu."
+read pause
